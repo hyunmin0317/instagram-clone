@@ -14,12 +14,13 @@
 게시물 전체 수 : ${count }, 방문한 수 : ${cookieCount }<br><br>
 
 
-<c:forEach items="${list}" var="guestbook">
-
-${guestbook.id }<br>
-${guestbook.name }<br>
+<c:forEach items="${list}" var="guestbook">	
+${guestbook.postId }<br>
+${guestbook.userId }<br>
+${guestbook.title }<br>
 ${guestbook.content }<br>
-${guestbook.regdate }<br>
+${guestbook.image }<br>
+${guestbook.date }<br>
 <c:if test="${sessionScope.isAdmin == 'true'}"><a href="delete?id=${guestbook.id}">삭제</a><br><br></c:if>
 </c:forEach>
 <br>
@@ -30,7 +31,7 @@ ${guestbook.regdate }<br>
 
 <br><br>
 <form method="post" action="write">
-name : <input type="text" name="name"><br>
+title : <input type="text" name="title"><br>
 <textarea name="content" cols="60" rows="6"></textarea><br>
 <input type="submit" value="등록">
 </form>

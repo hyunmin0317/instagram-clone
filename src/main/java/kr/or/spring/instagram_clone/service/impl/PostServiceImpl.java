@@ -45,9 +45,9 @@ public class PostServiceImpl implements PostService{
 	@Override
 	@Transactional(readOnly=false)
 	public Post addGuestbook(Post guestbook, String ip) {
-		guestbook.setRegdate(new Date());
+		guestbook.setDate(new Date());
 		Long id = guestbookDao.insert(guestbook);
-		guestbook.setId(id);
+		guestbook.setPostId(id);
 		
 		Log log = new Log();
 		log.setIp(ip);

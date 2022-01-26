@@ -21,17 +21,15 @@ import static kr.or.spring.instagram_clone.dao.PostDaoSqls.*;
 
 @Repository
 public class PostDao {
-	 int n;
 	 private NamedParameterJdbcTemplate jdbc;
 	    private SimpleJdbcInsert insertAction;
 	    private RowMapper<Post> rowMapper = BeanPropertyRowMapper.newInstance(Post.class);
 
 	    public PostDao(DataSource dataSource) {
-	    	this.n = 0;
 	        this.jdbc = new NamedParameterJdbcTemplate(dataSource);
 	        this.insertAction = new SimpleJdbcInsert(dataSource)
-	                .withTableName("guestbook")
-	                .usingGeneratedKeyColumns("id");
+	                .withTableName("Post")
+	                .usingGeneratedKeyColumns("postId");
 	    }
 	    
 	    public List<Post> selectAll(Integer start, Integer limit) {
@@ -43,19 +41,17 @@ public class PostDao {
 
 
 		public Long insert(Post guestbook) {
-			n++;
 			SqlParameterSource params = new BeanPropertySqlParameterSource(guestbook);
 			return insertAction.executeAndReturnKey(params).longValue();
 		}
 		
 		public int deleteById(Long id) {
-			n--;
-			Map<String, ?> params = Collections.singletonMap("id", id);
+			Map<String, ?> params = Collections.singletonMap("postId", id);
 			return jdbc.update(DELETE_BY_ID, params);
 		}
 		
 		public int selectCount() {
 			Map<String, Integer> params = new HashMap<>();
-			return jdbc.queryForObject("SELECT count(*) FROM guestbook", params, Integer.class);
+			return jdbc.queryForObject("SELECT count(*) FROM Post", params, Integer.class);
 		}
 }
