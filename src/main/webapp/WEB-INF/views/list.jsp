@@ -16,12 +16,11 @@
 
 <c:forEach items="${list}" var="guestbook">	
 ${guestbook.postId }<br>
-${guestbook.userId }<br>
 ${guestbook.title }<br>
 ${guestbook.content }<br>
 ${guestbook.image }<br>
 ${guestbook.date }<br>
-<c:if test="${sessionScope.isAdmin == 'true'}"><a href="delete?id=${guestbook.id}">삭제</a><br><br></c:if>
+<c:if test="${sessionScope.isAdmin == 'true'}"><a href="delete?id=${guestbook.postId}">삭제</a><br><br></c:if>
 </c:forEach>
 <br>
 

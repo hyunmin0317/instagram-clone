@@ -46,7 +46,7 @@ public class PostDao {
 		}
 		
 		public int deleteById(Long id) {
-			Map<String, ?> params = Collections.singletonMap("postId", id);
+			Map<String, ?> params = Collections.singletonMap("id", id);
 			return jdbc.update(DELETE_BY_ID, params);
 		}
 		
