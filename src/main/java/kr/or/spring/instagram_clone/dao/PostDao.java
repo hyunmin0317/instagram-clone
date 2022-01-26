@@ -39,7 +39,6 @@ public class PostDao {
 	        return jdbc.query(SELECT_PAGING, params, rowMapper);
 	    }
 
-
 		public Long insert(Post guestbook) {
 			SqlParameterSource params = new BeanPropertySqlParameterSource(guestbook);
 			return insertAction.executeAndReturnKey(params).longValue();
