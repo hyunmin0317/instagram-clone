@@ -22,17 +22,17 @@ import kr.or.spring.instagram_clone.dto.Post;
 import kr.or.spring.instagram_clone.service.PostService;
 
 @RestController
-@RequestMapping(path="/guestbooks")
+@RequestMapping(path="/post")
 public class PostApiController {
 	@Autowired
-	PostService guestbookService;
+	PostService postService;
 	
 	@GetMapping
 	public Map<String, Object> list(@RequestParam(name="start", required=false, defaultValue="0") int start) {
 		
-		List<Post> list = guestbookService.getGuestbooks(start);
+		List<Post> list = postService.getPosts(start);
 		
-		int count = guestbookService.getCount();
+		int count = postService.getCount();
 		int pageCount = count / PostService.LIMIT;
 		if(count % PostService.LIMIT > 0)
 			pageCount++;
@@ -51,12 +51,12 @@ public class PostApiController {
 	}
 	
 	@PostMapping
-	public Post write(@RequestBody Post guestbook,
+	public Post write(@RequestBody Post post,
 						HttpServletRequest request) {
 		String clientIp = request.getRemoteAddr();
 		// id가 입력된 guestbook이 반환된다.
-		Post resultGuestbook = guestbookService.addGuestbook(guestbook, clientIp);
-		return resultGuestbook;
+		Post resultPost = postService.addPost(post, clientIp);
+		return resultPost;
 	}
 	
 	@DeleteMapping("/{id}")
@@ -64,7 +64,7 @@ public class PostApiController {
 			HttpServletRequest request) {
 		String clientIp = request.getRemoteAddr();
 		
-		int deleteCount = guestbookService.deleteGuestbook(id, clientIp);
+		int deleteCount = postService.deletePost(id, clientIp);
 		return Collections.singletonMap("success", deleteCount > 0 ? "true" : "false");
 	}
 }

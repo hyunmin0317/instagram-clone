@@ -25,7 +25,7 @@ import kr.or.spring.instagram_clone.service.PostService;
 @Controller
 public class PostController {
 	@Autowired
-	PostService guestbookService;
+	PostService postService;
 
 	@GetMapping(path="/list")
 	public String list(@RequestParam(name="start", required=false, defaultValue="0") int start,
@@ -44,9 +44,9 @@ public class PostController {
 		cookie.setPath("/"); // / 경로 이하에 모두 쿠키 적용. 
 		response.addCookie(cookie);
 		
-		List<Post> list = guestbookService.getGuestbooks(start);
+		List<Post> list = postService.getPosts(start);
 		
-		int count = guestbookService.getCount();
+		int count = postService.getCount();
 		int pageCount = count / PostService.LIMIT;
 		if(count % PostService.LIMIT > 0)
 			pageCount++;
@@ -65,11 +65,11 @@ public class PostController {
 	}
 	
 	@PostMapping(path="/write")
-	public String write(@ModelAttribute Post guestbook,
+	public String write(@ModelAttribute Post post,
 						HttpServletRequest request) {
 		String clientIp = request.getRemoteAddr();
 		System.out.println("clientIp : " + clientIp);
-		guestbookService.addGuestbook(guestbook, clientIp);
+		postService.addPost(post, clientIp);
 		return "redirect:list";
 	}
 	
@@ -84,7 +84,7 @@ public class PostController {
 			return "redirect:loginform";
 		}
 		String clientIp = request.getRemoteAddr();
-		guestbookService.deleteGuestbook(id, clientIp);
+		postService.deletePost(id, clientIp);
 		return "redirect:list";		
 	}
 }
