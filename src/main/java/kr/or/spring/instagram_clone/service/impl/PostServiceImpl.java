@@ -25,14 +25,14 @@ public class PostServiceImpl implements PostService{
 
 	@Override
 	@Transactional
-	public List<Post> getGuestbooks(Integer start) {
+	public List<Post> getPosts(Integer start) {
 		List<Post> list = guestbookDao.selectAll(start, PostService.LIMIT);
 		return list;
 	}
 
 	@Override
 	@Transactional(readOnly=false)
-	public int deleteGuestbook(Long id, String ip) {
+	public int deletePost(Long id, String ip) {
 		int deleteCount = guestbookDao.deleteById(id);
 		Log log = new Log();
 		log.setIp(ip);
@@ -44,10 +44,10 @@ public class PostServiceImpl implements PostService{
 
 	@Override
 	@Transactional(readOnly=false)
-	public Post addGuestbook(Post guestbook, String ip) {
-		guestbook.setRegdate(new Date());
+	public Post addPost(Post guestbook, String ip) {
+		guestbook.setDate(new Date());
 		Long id = guestbookDao.insert(guestbook);
-		guestbook.setId(id);
+		guestbook.setPostId(id);
 		
 		Log log = new Log();
 		log.setIp(ip);

@@ -3,22 +3,30 @@ package kr.or.spring.instagram_clone.dto;
 import java.util.Date;
 
 public class Post {
-	private Long id;
-	private String name;
+	private Long postId;
+	private Long userId;
+	private String title;
 	private String content;
-	private Date regdate;
+	private String image;
+	private Date date;
 	
-	public Long getId() {
-		return id;
+	public Long getPostId() {
+		return postId;
 	}
-	public void setId(Long id) {
-		this.id = id;
+	public void setPostId(Long postId) {
+		this.postId = postId;
 	}
-	public String getName() {
-		return name;
+	public Long getUserId() {
+		return userId;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	public String getContent() {
 		return content;
@@ -26,14 +34,21 @@ public class Post {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getRegdate() {
-		return regdate;
+	public String getImage() {
+		return image;
 	}
-	public void setRegdate(Date regdate) {
-		this.regdate = regdate;
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
 	}
 	@Override
 	public String toString() {
-		return "Guestbook [id=" + id + ", name=" + name + ", content=" + content + ", regdate=" + regdate + "]";
+		return "Post [postId=" + postId + ", userId=" + userId + ", title=" + title + ", content=" + content
+				+ ", image=" + image + ", date=" + date + "]";
 	}
 }
