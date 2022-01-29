@@ -58,9 +58,11 @@
 	                </svg>
 	              </a>
 	            </li>
+	            
+	            <!--
 	            <li class="nav-item dropdown">
 	              <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-	                환영합니다. <!--{{ user.username }}!--> 최현민님
+	                환영합니다. {{ user.username }}! 최현민님
 	              </a>
 	              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	                <li><a class="dropdown-item" href="{% url 'facebook:post_create' %}">Post</a></li>
@@ -68,9 +70,11 @@
 	                <li><a class="dropdown-item" href="{% url 'common:logout' %}">Logout</a></li>
 	              </ul>
 	            </li>
-	            <!--{% else %}-->
+	            {% else %}
+	            -->
+	            
 	            <li class="nav-item">
-	              <a class="nav-item nav-link" href="{% url 'common:login' %}">Login</a>
+	              <a class="nav-item nav-link" href="loginform">Login</a>
 	            </li>
 	            <li class="nav-item">
 	              <a class="nav-item nav-link" href="{% url 'common:signup' %}">Signup</a>
