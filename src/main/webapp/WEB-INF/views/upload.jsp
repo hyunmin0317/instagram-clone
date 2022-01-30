@@ -90,12 +90,29 @@
 		<main role="main">
 			
 			<div class="container">
-			    <h5 class="my-3 border-bottom pb-2">관리자 로그인</h5>
-					${errorMessage}
-					
-					<form method="post" action="login">
-						암호 : <input type="password" name="passwd">
-						<input type="submit"><br><br>
+			    <h5 class="my-3 border-bottom pb-2">게시물 등록</h5>
+			    	<form method="post" action="write" class="post-form my-3">
+				
+						<div class="input-group mb-3">
+						  <span class="input-group-text" id="inputGroup-sizing-default">Title</span>
+						  <input type="text" name="title" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+						</div>
+
+						<div class="input-group mb-3">
+						  <label class="input-group-text" for="inputGroupFile01">Image</label>
+						  <input type="file" class="form-control" id="inputGroupFile01">
+						</div>
+
+						<div class="form-floating">
+						  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" name="content" style="height: 100px"></textarea>
+						  <label for="floatingTextarea">Content</label>
+						</div><br>
+
+						<div class="btn-group btn-group-lg" role="group" aria-label="Basic checkbox toggle button group">
+						  <input type="submit" value="등록" class="btn-check" id="btncheck1" autocomplete="off">
+						  <label class="btn btn-primary" for="btncheck1">저장하기</label>		
+						</div>
+						
 					</form>
 			</div>
 		</main>

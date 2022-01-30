@@ -64,6 +64,11 @@ public class PostController {
 		return "list";
 	}
 	
+	@GetMapping(path="/upload")
+	public String upload() {
+		return "upload";
+	}
+	
 	@PostMapping(path="/write")
 	public String write(@ModelAttribute Post post,
 						HttpServletRequest request) {
