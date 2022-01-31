@@ -1,9 +1,0 @@
-CREATE TABLE Post (
-    postId bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-    userId bigint(20) unsigned,
-    title varchar(255) NOT NULL,
-    content text,
-    image varchar(255),
-    date datetime,
-    PRIMARY KEY(postId)
-);
