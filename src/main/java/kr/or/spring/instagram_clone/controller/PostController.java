@@ -1,5 +1,7 @@
 package kr.or.spring.instagram_clone.controller;
 
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.or.spring.instagram_clone.dto.Post;
@@ -69,14 +72,59 @@ public class PostController {
 		return "upload";
 	}
 	
+//	@PostMapping("/write")
+//	public String upload(@RequestParam("file") MultipartFile file) {
+//		
+//		System.out.println("파일 이름 : " + file.getOriginalFilename());
+//		System.out.println("파일 크기 : " + file.getSize());
+//		
+//        try(
+//                // 맥일 경우 
+//                //FileOutputStream fos = new FileOutputStream("/tmp/" + file.getOriginalFilename());
+//                // 윈도우일 경우
+//                FileOutputStream fos = new FileOutputStream("c:/tmp/" + file.getOriginalFilename());
+//                InputStream is = file.getInputStream();
+//        ){
+//        	    int readCount = 0;
+//        	    byte[] buffer = new byte[1024];
+//            while((readCount = is.read(buffer)) != -1){
+//                fos.write(buffer,0,readCount);
+//            }
+//        }catch(Exception ex){
+//            throw new RuntimeException("file Save Error");
+//        }
+//		
+//		
+//		return "uploadok";
+//	}
+	
 	@PostMapping(path="/write")
 	public String write(@ModelAttribute Post post,
-						HttpServletRequest request) {
+						HttpServletRequest request,
+						@RequestParam("file") MultipartFile file) {
 		String clientIp = request.getRemoteAddr();
 		System.out.println("clientIp : " + clientIp);
 		postService.addPost(post, clientIp);
+		
+		System.out.println("파일 이름 : " + file.getOriginalFilename());
+		System.out.println("파일 크기 : " + file.getSize());
+		
+        try(
+                FileOutputStream fos = new FileOutputStream("c:/tmp/" + file.getOriginalFilename());
+                InputStream is = file.getInputStream();
+        ){
+        	    int readCount = 0;
+        	    byte[] buffer = new byte[1024];
+            while((readCount = is.read(buffer)) != -1){
+                fos.write(buffer,0,readCount);
+            }
+        }catch(Exception ex){
+            throw new RuntimeException("file Save Error");
+        
+        }
 		return "redirect:list";
 	}
+        
 	
    
 	@GetMapping(path="/delete")

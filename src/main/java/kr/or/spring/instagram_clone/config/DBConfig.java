@@ -17,9 +17,9 @@ public class DBConfig implements TransactionManagementConfigurer {
 
 	private String url = "jdbc:mysql://localhost:3306/connectdb?useUnicode=true&characterEncoding=utf8";
 
-	private String username = "hyunmin";
+	private String username = "gomin0";
 
-	private String password = "0317";
+	private String password = "end981113.";
 	
 	@Bean
 	public DataSource dataSource() {

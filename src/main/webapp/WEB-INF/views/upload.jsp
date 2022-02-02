@@ -91,7 +91,7 @@
 			
 			<div class="container">
 			    <h5 class="my-3 border-bottom pb-2">게시물 등록</h5>
-			    	<form method="post" action="write" class="post-form my-3">
+			    	<form method="post" action="write" class="post-form my-3" enctype="multipart/form-data">
 				
 						<div class="input-group mb-3">
 						  <span class="input-group-text" id="inputGroup-sizing-default">Title</span>
@@ -100,7 +100,7 @@
 
 						<div class="input-group mb-3">
 						  <label class="input-group-text" for="inputGroupFile01">Image</label>
-						  <input type="file" class="form-control" id="inputGroupFile01">
+						  <input type="file" class="form-control" id="inputGroupFile01" name="file">
 						</div>
 
 						<div class="form-floating">
