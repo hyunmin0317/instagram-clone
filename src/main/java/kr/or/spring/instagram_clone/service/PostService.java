@@ -8,6 +8,6 @@ public interface PostService {
 	public static final Integer LIMIT = 5;
 	public List<Post> getPosts(Integer start);
 	public int deletePost(Long id, String ip);
-	public Post addPost(Post post, String ip);
+	public Post addPost(Post post, String ip, String image);
 	public int getCount();
 }

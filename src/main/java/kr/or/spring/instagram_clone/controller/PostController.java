@@ -76,9 +76,10 @@ public class PostController {
 	public String write(@ModelAttribute Post post,
 						HttpServletRequest request,
 						@RequestParam("file") MultipartFile file) {
+		String path = "c:/tmp/".concat(file.getOriginalFilename());
 		String clientIp = request.getRemoteAddr();
 		System.out.println("clientIp : " + clientIp);
-		postService.addPost(post, clientIp);
+		postService.addPost(post, clientIp, path);
 		
 		System.out.println("파일 이름 : " + file.getOriginalFilename());
 		System.out.println("파일 크기 : " + file.getSize());
@@ -87,13 +88,15 @@ public class PostController {
                 // 맥일 경우 
                 //FileOutputStream fos = new FileOutputStream("/tmp/" + file.getOriginalFilename());
                 // 윈도우일 경우
-                FileOutputStream fos = new FileOutputStream("c:/tmp/" + file.getOriginalFilename());
+                FileOutputStream fos = new FileOutputStream(path);
                 InputStream is = file.getInputStream();
         ){
         	    int readCount = 0;
         	    byte[] buffer = new byte[1024];
             while((readCount = is.read(buffer)) != -1){
                 fos.write(buffer,0,readCount);
+                
+                
             }
         }catch(Exception ex){
             throw new RuntimeException("file Save Error");
