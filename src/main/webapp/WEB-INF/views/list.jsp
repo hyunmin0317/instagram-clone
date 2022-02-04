@@ -101,10 +101,10 @@
 			                              </a>
 			                              <img class="card-img-top" src="<spring:url value='/resources/img/test.jpg'/>" alt=" Card image cap"/>
 			                              <div class="card-body">
-			
 			 								<h4>${post.title }</h4>
 			                                  <p class="card-text">${post.content }</p>    
 			                                  <p class="card-text">${post.date }</p>
+			                                  <p class="card-text">${post.image }</p>
 			                                  <c:if test="${sessionScope.isAdmin == 'true'}"><a href="delete?id=${post.postId}">삭제</a><br><br></c:if>
 			                              </div>
 			                          </div>

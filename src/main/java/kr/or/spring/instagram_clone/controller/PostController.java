@@ -2,6 +2,8 @@ package kr.or.spring.instagram_clone.controller;
 
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,11 +78,21 @@ public class PostController {
 	public String write(@ModelAttribute Post post,
 						HttpServletRequest request,
 						@RequestParam("file") MultipartFile file) {
+		
+		Path relativePath = Paths.get("");
+	    String path2 = relativePath.toAbsolutePath().toString();
+
+		System.out.println(path2);
+		
 		String path = "c:/tmp/".concat(file.getOriginalFilename());
 		String clientIp = request.getRemoteAddr();
 		System.out.println("clientIp : " + clientIp);
 		postService.addPost(post, clientIp, path);
 		
+		
+
+		
+		System.out.println(System.getProperty("user.dir"));
 		System.out.println("파일 이름 : " + file.getOriginalFilename());
 		System.out.println("파일 크기 : " + file.getSize());
 		
