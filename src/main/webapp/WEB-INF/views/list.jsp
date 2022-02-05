@@ -8,7 +8,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/hyunmin0317/instagram-clone/main/src/main/webapp/resources/img/instagram.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="https://raw.githubusercontent.com/hyunmin0317/instagram-clone/main/src/main/webapp/resources/static/instagram.svg">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="<spring:url value='/resources/static/jumbotron-narrow.css'/>">
@@ -99,7 +99,7 @@
 			                              <a href="{% url 'facebook:post_user' post.author %}" class="list-group-item">
 											<div>${post.postId }</div>
 			                              </a>
-			                              <img class="card-img-top" src="<spring:url value='/resources/img/test.jpg'/>" alt=" Card image cap"/>
+			                             <img class="card-img-top" src="<spring:url value='/resources/img/${post.image}'/>" alt=" Card image cap"/>
 			                              <div class="card-body">
 			 								<h4>${post.title }</h4>
 			                                  <p class="card-text">${post.content }</p>    

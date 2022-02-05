@@ -1,5 +1,6 @@
 package kr.or.spring.instagram_clone.controller;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.nio.file.Path;
@@ -79,22 +80,26 @@ public class PostController {
 						HttpServletRequest request,
 						@RequestParam("file") MultipartFile file) {
 		
-		Path relativePath = Paths.get("");
-	    String path2 = relativePath.toAbsolutePath().toString();
-
-		System.out.println(path2);
+//		String path = "c:/image";
+//		File Folder = new File(path);
+//		if (!Folder.exists()) {
+//			try{
+//			    Folder.mkdir(); //폴더 생성
+//		    } catch(Exception e){
+//		    	e.getStackTrace();
+//			}        
+//	    }
 		
-		String path = "c:/tmp/".concat(file.getOriginalFilename());
+//		String path = "c:/tmp/".concat(file.getOriginalFilename());
+		String path = "c:/Users/CodeWise/OneDrive - 몽타 주식회사/바탕 화면/Project/instagram-clone/src/main/webapp/resources/img/".concat(file.getOriginalFilename());
+		
 		String clientIp = request.getRemoteAddr();
 		System.out.println("clientIp : " + clientIp);
-		postService.addPost(post, clientIp, path);
-		
-		
+		postService.addPost(post, clientIp, file.getOriginalFilename());
 
-		
-		System.out.println(System.getProperty("user.dir"));
 		System.out.println("파일 이름 : " + file.getOriginalFilename());
 		System.out.println("파일 크기 : " + file.getSize());
+		System.out.println(path);
 		
         try(
                 // 맥일 경우 
