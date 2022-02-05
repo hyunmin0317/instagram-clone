@@ -91,7 +91,7 @@ public class PostController {
 //	    }
 		
 //		String path = "c:/tmp/".concat(file.getOriginalFilename());
-		String path = "c:/Users/CodeWise/OneDrive - 몽타 주식회사/바탕 화면/Project/instagram-clone/src/main/webapp/resources/img/".concat(file.getOriginalFilename());
+		String path = "c:/Users/CodeWise/OneDrive - 몽타 주식회사/바탕 화면/Project/instagram-clone/src/main/webapp/resources/img/"+file.getOriginalFilename();
 		
 		String clientIp = request.getRemoteAddr();
 		System.out.println("clientIp : " + clientIp);
