@@ -1,8 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
-<%@taglib  prefix="spring" uri="http://www.springframework.org/tags" %>    
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page contentType="text/html; charset=utf-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html lang="ko">
   <head>
     <!-- Required meta tags -->
@@ -86,57 +85,38 @@
 	      </div>
 	    </nav>
 	    
-	<!-- 게시물 -->	
-		<main role="main">
-		      <div class="album bg-light">
-		        <div class="container-sm">
-		            <div class="album py-5 bg-light">
-		              <div class="container">  
-		                  <c:forEach items="${list}" var="post">	
-			                  <div class="row">
-			                      <div class="container">
-			                          <div class="card shadow-sm">
-			                              <a href="{% url 'facebook:post_user' post.author %}" class="list-group-item">
-											<div>${post.postId }</div>
-			                              </a>
-			                             <img class="card-img-top" src="<spring:url value='/resources/img/${post.image}'/>" alt=" Card image cap"/>
-			                              <div class="card-body">
-			 								<h4>${post.title }</h4>
-			                                  <p class="card-text">${post.content }</p>    
-			                                  <p class="card-text">${post.date }</p>
-			                                  <p class="card-text">${post.image }</p>
-			                                  <c:if test="${sessionScope.isAdmin == 'true'}"><a href="delete?id=${post.postId}">삭제</a><br><br></c:if>
-			                              </div>
-			                          </div>
-			                      </div>
-			                  </div>
-			                  <br>
-		                  </c:forEach>
-		                  
-		                  <c:forEach items="${pageStartList}" var="pageIndex" varStatus="status">
-							<a href="list?start=${pageIndex}">${status.index +1 }</a>&nbsp; &nbsp;
-						  </c:forEach>
-							<br><br>
-							
-							<form method="post" action="write">
-							title : <input type="text" name="title"><br>
-							<textarea name="content" cols="60" rows="6"></textarea><br>
-							<input type="submit" value="등록">
-							</form>
-		                  
-		              </div>
-		            </div>
-		          </div>
+    <main role="main">
+	      <div class="container">
+	          <h5 class="my-3 border-bottom pb-2">마이페이지</h5>
+		        <div>
+		          <label>id</label>
+		          <p>${member.id}</p>
 		        </div>
-		      </div>
-		</main>
-	
-    <!-- Optional JavaScript; choose one of the two! -->
+		        <div>
+		          <label>이름</label>
+		          <p>${member.name}</p>
+		        </div>
+		        <div>
+		          <label>암호</label>
+		          <p>${member.password}</p>
+		        </div>
+		        <div>
+		          <label>등록일</label>
+		          <p>${member.createDate}</p>
+		        </div>
+		        <div>
+		          <label>수정일</label>
+		          <p>${member.modifyDate}</p>
+		        </div>
+	    </div>
+    </main>
+  </body>
+  
+   <!-- Optional JavaScript; choose one of the two! -->
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-
-  </body>
+  
 </html>
