@@ -117,7 +117,7 @@ public class PostController {
 //	    }
 		
 //		String path = "c:/tmp/".concat(file.getOriginalFilename());
-		String path = "c:/Users/CodeWise/OneDrive - 몽타 주식회사/바탕 화면/Project/instagram-clone/src/main/webapp/resources/img/"+file.getOriginalFilename();
+		String path = "C:/Users/고민영/Desktop/instagram-clone/instagram-clone/src/main/webapp/resources/img/"+file.getOriginalFilename();
 		
 		String clientIp = request.getRemoteAddr();
 		System.out.println("clientIp : " + clientIp);
@@ -128,10 +128,13 @@ public class PostController {
 		System.out.println(path);
 		
         try(
+
                 // 맥일 경우 
                 //FileOutputStream fos = new FileOutputStream("/tmp/" + file.getOriginalFilename());
                 // 윈도우일 경우
                 FileOutputStream fos = new FileOutputStream(path);
+
+
                 InputStream is = file.getInputStream();
         ){
         	    int readCount = 0;

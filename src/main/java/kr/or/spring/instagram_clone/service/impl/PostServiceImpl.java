@@ -47,7 +47,9 @@ public class PostServiceImpl implements PostService{
 	public Post addPost(Post post, String ip, String image) {
 		post.setDate(new Date());
 		post.setImage(image);
+
 		Long id = postDao.insert(post);
+
 		post.setPostId(id);
 		
 		Log log = new Log();
