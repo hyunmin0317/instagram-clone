@@ -104,13 +104,13 @@ public class PostController {
 						@RequestParam("file") MultipartFile file) {
 		String clientIp = request.getRemoteAddr();
 		System.out.println("clientIp : " + clientIp);
-		postService.addPost(post, clientIp);
+		postService.addPost(post, clientIp, file.getOriginalFilename());
 		
-		System.out.println("파일 이름 : " + file.getOriginalFilename());
+		System.out.println("파일 이름 : " + file.getOriginalFilename());   
 		System.out.println("파일 크기 : " + file.getSize());
 		
         try(
-                FileOutputStream fos = new FileOutputStream("c:/tmp/" + file.getOriginalFilename());
+                FileOutputStream fos = new FileOutputStream("C:/Users/고민영/Desktop/instagram-clone/instagram-clone/src/main/webapp/resources/img/" + file.getOriginalFilename());
                 InputStream is = file.getInputStream();
         ){
         	    int readCount = 0;

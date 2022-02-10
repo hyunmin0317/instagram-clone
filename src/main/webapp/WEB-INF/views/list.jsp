@@ -99,7 +99,7 @@
 			                              <a href="{% url 'facebook:post_user' post.author %}" class="list-group-item">
 											<div>${post.postId }</div>
 			                              </a>
-			                              <img class="card-img-top" src="<spring:url value='/resources/img/test.jpg'/>" alt=" Card image cap"/>
+			                              <img class="card-img-top" src="<spring:url value='/resources/img/${post.image}'/>" alt=" Card image cap"/>
 			                              <div class="card-body">
 			
 			 								<h4>${post.title }</h4>

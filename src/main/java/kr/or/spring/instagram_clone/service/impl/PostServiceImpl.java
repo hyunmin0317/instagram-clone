@@ -44,10 +44,11 @@ public class PostServiceImpl implements PostService{
 
 	@Override
 	@Transactional(readOnly=false)
-	public Post addPost(Post guestbook, String ip) {
-		guestbook.setDate(new Date());
-		Long id = guestbookDao.insert(guestbook);
-		guestbook.setPostId(id);
+	public Post addPost(Post post, String ip, String image) {
+		post.setDate(new Date());
+		post.setImage(image);
+		Long id = guestbookDao.insert(post);
+		post.setPostId(id);
 		
 		Log log = new Log();
 		log.setIp(ip);
@@ -55,7 +56,7 @@ public class PostServiceImpl implements PostService{
 		log.setRegdate(new Date());
 		logDao.insert(log);
 		
-		return guestbook;
+		return post;
 	}
 
 	@Override
