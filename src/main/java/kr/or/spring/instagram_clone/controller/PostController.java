@@ -74,6 +74,30 @@ public class PostController {
 		
 		return "list";
 	}
+		
+//	@GetMapping(path="/user")
+//	public String mypage(@RequestParam(name="start", required=false, defaultValue="0") int start,
+//					   ModelMap model,
+//					   HttpServletResponse response) {
+//
+//		List<Post> list = postService.getPosts(start);
+//		
+//		int count = postService.getCount();
+//		int pageCount = count / PostService.LIMIT;
+//		if(count % PostService.LIMIT > 0)
+//			pageCount++;
+//		
+//		List<Integer> pageStartList = new ArrayList<>();
+//		for(int i = 0; i < pageCount; i++) {
+//			pageStartList.add(i * PostService.LIMIT);
+//		}
+//		
+//		model.addAttribute("list", list);
+//		model.addAttribute("count", count);
+//		model.addAttribute("pageStartList", pageStartList);
+//		
+//		return "list";
+//	}
 	
 	@GetMapping(path="/upload")
 	public String upload() {
@@ -127,11 +151,10 @@ public class PostController {
 		
 		String loginId = principal.getName();
         User user = userService.getUserByEmail(loginId);
-        System.out.println(user.getEmail());
         
 		String clientIp = request.getRemoteAddr();
 		System.out.println("clientIp : " + clientIp);
-		postService.addPost(post, clientIp, file.getOriginalFilename(), user.getId());
+		postService.addPost(post, clientIp, file.getOriginalFilename(), user);
 
 		
 		System.out.println("파일 이름 : " + file.getOriginalFilename());

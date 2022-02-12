@@ -96,8 +96,8 @@
 			                  <div class="row">
 			                      <div class="container">
 			                          <div class="card shadow-sm">
-			                              <a href="{% url 'facebook:post_user' post.author %}" class="list-group-item">
-											<div>${post.postId }</div>
+			                              <a href="/instagram-clone/${post.userName}" class="list-group-item">
+											<div>${post.userName }</div>
 			                              </a>
 			                              <img class="card-img-top" src="<spring:url value='/resources/img/${post.image}'/>" alt=" Card image cap"/>
 
@@ -118,12 +118,6 @@
 							<a href="list?start=${pageIndex}">${status.index +1 }</a>&nbsp; &nbsp;
 						  </c:forEach>
 							<br><br>
-							
-							<form method="post" action="write">
-							title : <input type="text" name="title"><br>
-							<textarea name="content" cols="60" rows="6"></textarea><br>
-							<input type="submit" value="등록">
-							</form>
 		                  
 		              </div>
 		            </div>
