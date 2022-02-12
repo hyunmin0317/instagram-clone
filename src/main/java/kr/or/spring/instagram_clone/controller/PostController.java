@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,13 +26,17 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.or.spring.instagram_clone.dto.Post;
+import kr.or.spring.instagram_clone.dto.User;
 import kr.or.spring.instagram_clone.service.PostService;
+import kr.or.spring.instagram_clone.service.UserService;
 
 
 @Controller
 public class PostController {
 	@Autowired
 	PostService postService;
+	@Autowired
+	UserService userService;
 
 	@GetMapping(path="/list")
 	public String list(@RequestParam(name="start", required=false, defaultValue="0") int start,
@@ -104,6 +109,7 @@ public class PostController {
 	@PostMapping(path="/write")
 	public String write(@ModelAttribute Post post,
 						HttpServletRequest request,
+						Principal principal,
 						@RequestParam("file") MultipartFile file) {
 		
 //		String path = "c:/image";
@@ -117,12 +123,17 @@ public class PostController {
 //	    }
 		
 //		String path = "c:/tmp/".concat(file.getOriginalFilename());
-		String path = "C:/Users/고민영/Desktop/instagram-clone/instagram-clone/src/main/webapp/resources/img/"+file.getOriginalFilename();
+		String path = "C:\\Users\\CodeWise\\OneDrive - 몽타 주식회사\\바탕 화면\\Project\\instagram-clone\\src\\main\\webapp\\resources\\img\\"+file.getOriginalFilename();
 		
+		String loginId = principal.getName();
+        User user = userService.getUserByEmail(loginId);
+        System.out.println(user.getEmail());
+        
 		String clientIp = request.getRemoteAddr();
 		System.out.println("clientIp : " + clientIp);
-		postService.addPost(post, clientIp, file.getOriginalFilename());
+		postService.addPost(post, clientIp, file.getOriginalFilename(), user.getId());
 
+		
 		System.out.println("파일 이름 : " + file.getOriginalFilename());
 		System.out.println("파일 크기 : " + file.getSize());
 		System.out.println(path);

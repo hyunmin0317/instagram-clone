@@ -44,9 +44,10 @@ public class PostServiceImpl implements PostService{
 
 	@Override
 	@Transactional(readOnly=false)
-	public Post addPost(Post post, String ip, String image) {
+	public Post addPost(Post post, String ip, String image, Long userId) {
 		post.setDate(new Date());
 		post.setImage(image);
+		post.setUserId(userId);
 
 		Long id = postDao.insert(post);
 

@@ -35,13 +35,13 @@ public class UserRoleDao {
 
 		return jdbc.query(UserRoleDaoSqls.SELECT_ALL_BY_EMAIL, map, rowMapper);
 	}
-	public void addAdminRole(int userId) {
-		Map<String, Integer> params = Collections.singletonMap("userId", userId);
+	public void addAdminRole(Long userId) {
+		Map<String, Long> params = Collections.singletonMap("userId", userId);
 		jdbc.update(UserRoleDaoSqls.INSERT_ADMIN_ROLE, params);
 	}
 
-	public void addUserRole(int userId) {
-		Map<String, Integer> params = Collections.singletonMap("userId", userId);
+	public void addUserRole(Long userId) {
+		Map<String, Long> params = Collections.singletonMap("userId", userId);
 		jdbc.update(UserRoleDaoSqls.INSERT_USER_ROLE, params);
 	}
 }

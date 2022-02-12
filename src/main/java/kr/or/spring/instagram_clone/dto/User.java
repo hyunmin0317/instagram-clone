@@ -3,7 +3,7 @@ package kr.or.spring.instagram_clone.dto;
 import java.util.Date;
 
 public class User {
-    private int id;
+    private Long id;
     private String name;
     private String password;
     private String email;
@@ -22,11 +22,11 @@ public class User {
         this.email = email;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

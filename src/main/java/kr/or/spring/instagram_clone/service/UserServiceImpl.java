@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
 		userDao.addUser(user);
 		
 		User selectedUser = userDao.getUserByEmail(user.getEmail());
-		int userId = selectedUser.getId();
+		Long userId = selectedUser.getId();
 		if(admin) {
 			userRoleDao.addAdminRole(userId);
 		}
