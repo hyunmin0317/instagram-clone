@@ -40,20 +40,10 @@ public class PostController {
 
 	@GetMapping(path="/list")
 	public String list(@RequestParam(name="start", required=false, defaultValue="0") int start,
-					   ModelMap model, @CookieValue(value="count", defaultValue="1", required=true) String value,
+					   ModelMap model,
+					   Principal principal,
 					   HttpServletResponse response) {
 		
-		try {
-			int i = Integer.parseInt(value);
-			value = Integer.toString(++i);
-		}catch(Exception ex){
-			value = "1";
-		}
-		
-		Cookie cookie = new Cookie("count", value);
-		cookie.setMaxAge(60 * 60 * 24 * 365); // 1년 동안 유지.
-		cookie.setPath("/"); // / 경로 이하에 모두 쿠키 적용. 
-		response.addCookie(cookie);
 		
 		List<Post> list = postService.getPosts(start);
 		
@@ -67,68 +57,21 @@ public class PostController {
 			pageStartList.add(i * PostService.LIMIT);
 		}
 		
+		String loginId = principal.getName();
+		User user = userService.getUserByEmail(loginId);
+		
+		model.addAttribute("user", user.getName());
 		model.addAttribute("list", list);
 		model.addAttribute("count", count);
 		model.addAttribute("pageStartList", pageStartList);
-		model.addAttribute("cookieCount", value);
 		
 		return "list";
 	}
-		
-//	@GetMapping(path="/user")
-//	public String mypage(@RequestParam(name="start", required=false, defaultValue="0") int start,
-//					   ModelMap model,
-//					   HttpServletResponse response) {
-//
-//		List<Post> list = postService.getPosts(start);
-//		
-//		int count = postService.getCount();
-//		int pageCount = count / PostService.LIMIT;
-//		if(count % PostService.LIMIT > 0)
-//			pageCount++;
-//		
-//		List<Integer> pageStartList = new ArrayList<>();
-//		for(int i = 0; i < pageCount; i++) {
-//			pageStartList.add(i * PostService.LIMIT);
-//		}
-//		
-//		model.addAttribute("list", list);
-//		model.addAttribute("count", count);
-//		model.addAttribute("pageStartList", pageStartList);
-//		
-//		return "list";
-//	}
 	
 	@GetMapping(path="/upload")
 	public String upload() {
 		return "upload";
 	}
-	
-//	@PostMapping("/write")
-//	public String upload(@RequestParam("file") MultipartFile file) {
-//		
-//		System.out.println("파일 이름 : " + file.getOriginalFilename());
-//		System.out.println("파일 크기 : " + file.getSize());
-//		
-//        try(
-//                // 맥일 경우 
-//                //FileOutputStream fos = new FileOutputStream("/tmp/" + file.getOriginalFilename());
-//                // 윈도우일 경우
-//                FileOutputStream fos = new FileOutputStream("c:/tmp/" + file.getOriginalFilename());
-//                InputStream is = file.getInputStream();
-//        ){
-//        	    int readCount = 0;
-//        	    byte[] buffer = new byte[1024];
-//            while((readCount = is.read(buffer)) != -1){
-//                fos.write(buffer,0,readCount);
-//            }
-//        }catch(Exception ex){
-//            throw new RuntimeException("file Save Error");
-//        }
-//		
-//		
-//		return "uploadok";
-//	}
 	
 	@PostMapping(path="/write")
 	public String write(@ModelAttribute Post post,
@@ -183,6 +126,36 @@ public class PostController {
         }
 		
 		return "redirect:list";
+	}
+	
+	@GetMapping(path="/detail")
+	public String detail(@RequestParam(name="name", required=true) String name,
+						@RequestParam(name="start", required=false, defaultValue="0") int start,
+						Principal principle,
+						ModelMap model) {
+		
+		List<Post> list = postService.getPosts(start, name);
+		int count = postService.getCount();
+		int pageCount = count / PostService.LIMIT;
+		if(count % PostService.LIMIT > 0)
+			pageCount++;
+		
+		List<Integer> pageStartList = new ArrayList<>();
+		for(int i = 0; i < pageCount; i++) {
+			pageStartList.add(i * PostService.LIMIT);
+		}
+		
+		String loginId = principle.getName();
+		User user = userService.getUserByEmail(loginId);
+		
+		model.addAttribute("user", user.getName());
+		model.addAttribute("list", list);
+		model.addAttribute("count", count);
+		model.addAttribute("pageStartList", pageStartList);
+		
+		System.out.println(name);
+		model.addAttribute("name", name);
+		return "detail";
 	}
         
 	

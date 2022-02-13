@@ -38,6 +38,15 @@ public class PostDao {
 	    		params.put("limit", limit);
 	        return jdbc.query(SELECT_PAGING, params, rowMapper);
 	    }
+	    
+	    public List<Post> selectName(Integer start, Integer limit, String name) {
+    		Map<String, Object> params = new HashMap<>();
+    		params.put("name", name);
+    		params.put("start", start);
+    		params.put("limit", limit);
+        return jdbc.query(SELECT_PAGING_NAME, params, rowMapper);
+    }
+	    
 
 		public Long insert(Post guestbook) {
 			SqlParameterSource params = new BeanPropertySqlParameterSource(guestbook);

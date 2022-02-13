@@ -89,6 +89,7 @@
 		        <div class="container-sm">
 		            <div class="album py-5 bg-light">
 		              <div class="container">  
+		              		<h1>${name}</h1><br><br>
 		                  <c:forEach items="${list}" var="post">	
 			                  <div class="row">
 			                      <div class="container">

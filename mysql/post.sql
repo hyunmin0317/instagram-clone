@@ -5,8 +5,7 @@ CREATE TABLE post (
     title VARCHAR(100) NOT NULL,
     content VARCHAR(255) NOT NULL,
     image VARCHAR(100) NOT NULL,
-    create_date DATETIME NULL DEFAULT NULL,
-    modify_date DATETIME NULL DEFAULT NULL,
+    date DATETIME NULL DEFAULT NULL,
     PRIMARY KEY(id),
     FOREIGN KEY (user_id)
     REFERENCES user (id)

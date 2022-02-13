@@ -30,6 +30,13 @@ public class PostServiceImpl implements PostService{
 		List<Post> list = postDao.selectAll(start, PostService.LIMIT);
 		return list;
 	}
+	
+	@Override
+	@Transactional
+	public List<Post> getPosts(Integer start, String name) {
+		List<Post> list = postDao.selectName(start, PostService.LIMIT, name);
+		return list;
+	}
 
 	@Override
 	@Transactional(readOnly=false)
@@ -50,11 +57,9 @@ public class PostServiceImpl implements PostService{
 		post.setImage(image);
 		post.setUserId(user.getId());
 		post.setUserName(user.getName());
-
-		Long id = postDao.insert(post);
-
-		post.setPostId(id);
 		
+		Long id = postDao.insert(post);
+		post.setPostId(id);
 		Log log = new Log();
 		log.setIp(ip);
 		log.setMethod("insert");
