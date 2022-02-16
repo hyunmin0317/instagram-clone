@@ -9,9 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import kr.or.spring.instagram_clone.dao.PostDao;
+
 import kr.or.spring.instagram_clone.dao.LogDao;
 import kr.or.spring.instagram_clone.dto.Post;
 import kr.or.spring.instagram_clone.dto.User;
+import kr.or.spring.instagram_clone.dto.Likes;
 import kr.or.spring.instagram_clone.dto.Log;
 import kr.or.spring.instagram_clone.service.PostService;
 
@@ -59,7 +61,7 @@ public class PostServiceImpl implements PostService{
 		post.setUserName(user.getName());
 		
 		Long id = postDao.insert(post);
-		post.setPostId(id);
+		post.setId(id);
 		Log log = new Log();
 		log.setIp(ip);
 		log.setMethod("insert");
@@ -72,6 +74,14 @@ public class PostServiceImpl implements PostService{
 	@Override
 	public int getCount() {
 		return postDao.selectCount();
+	}
+
+	@Override
+	public Likes addLikes(Likes likes, User user, Long post_id) {
+		likes.setUserId(user.getId());
+		likes.setPostId(post_id);
+		postDao.addLikes(likes);
+		return likes;
 	}
 	
 	

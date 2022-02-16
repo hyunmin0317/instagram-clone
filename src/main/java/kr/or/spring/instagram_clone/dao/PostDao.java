@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
+import kr.or.spring.instagram_clone.dto.Likes;
 import kr.or.spring.instagram_clone.dto.Post;
 
 import static kr.or.spring.instagram_clone.dao.PostDaoSqls.*;
@@ -61,5 +62,18 @@ public class PostDao {
 		public int selectCount() {
 			Map<String, Integer> params = new HashMap<>();
 			return jdbc.queryForObject("SELECT count(*) FROM Post", params, Integer.class);
+		}
+		
+		public void addLikes(Likes likes) {
+			Map<String, Object> params = new HashMap<>();
+
+			System.out.println(likes);
+			
+			params.put("post_id", likes.getPostId());
+			params.put("user_id", likes.getUserId());
+
+			// Insert Query를 위해서 update method를 사용했다.
+			jdbc.update("INSERT INTO likes(post_id, user_id) "
+					+ "VALUES (:post_id, :user_id);", params);
 		}
 }

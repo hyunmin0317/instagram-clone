@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kr.or.spring.instagram_clone.dto.Likes;
 import kr.or.spring.instagram_clone.dto.Post;
 import kr.or.spring.instagram_clone.dto.User;
 import kr.or.spring.instagram_clone.service.PostService;
@@ -159,7 +160,6 @@ public class PostController {
 	}
         
 	
-   
 	@GetMapping(path="/delete")
 	public String delete(@RequestParam(name="id", required=true) Long id, 
 			             @SessionAttribute("isAdmin") String isAdmin,
@@ -172,5 +172,16 @@ public class PostController {
 		String clientIp = request.getRemoteAddr();
 		postService.deletePost(id, clientIp);
 		return "redirect:list";		
+	}
+	
+	@GetMapping(path="/likes")
+	public String likes(@ModelAttribute Likes likes,
+						@RequestParam(name="id", required=true) Long id, 
+						Principal principal) {
+		String loginId = principal.getName();
+        User user = userService.getUserByEmail(loginId);
+        
+		postService.addLikes(likes, user, id);	
+		return "redirect:list";
 	}
 }

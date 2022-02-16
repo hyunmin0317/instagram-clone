@@ -3,7 +3,7 @@ package kr.or.spring.instagram_clone.dto;
 import java.util.Date;
 
 public class Post {
-	private Long postId;
+	private Long id;
 	private Long userId;
 	private String userName;
 	private String title;
@@ -11,12 +11,12 @@ public class Post {
 	private String image;
 	private Date date;
 
-	public Long getPostId() {
-		return postId;
+	public Long getId() {
+		return id;
 	}
 
-	public void setPostId(Long postId) {
-		this.postId = postId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Long getUserId() {
@@ -69,7 +69,7 @@ public class Post {
 
 	@Override
 	public String toString() {
-		return "Post [postId=" + postId + ", userId=" + userId + ", title=" + title + ", content=" + content
+		return "Post [Id=" + id + ", userId=" + userId + ", title=" + title + ", content=" + content
 				+ ", image=" + image + ", date=" + date + "]";
 	}
 }
