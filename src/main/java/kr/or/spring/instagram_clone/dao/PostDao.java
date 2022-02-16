@@ -66,9 +66,6 @@ public class PostDao {
 		
 		public void addLikes(Likes likes) {
 			Map<String, Object> params = new HashMap<>();
-
-			System.out.println(likes);
-			
 			params.put("post_id", likes.getPostId());
 			params.put("user_id", likes.getUserId());
 
