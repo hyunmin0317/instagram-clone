@@ -103,12 +103,11 @@
 			                                  <p class="card-text">${post.content }</p>    
 			                                  <p class="card-text">${post.date }</p>
 			                                  <c:if test="${sessionScope.isAdmin == 'true'}"><a href="delete?id=${post.id}">삭제</a><br><br></c:if>
-			                              
 			                              <p class="card-text">
 			                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
 			                                          <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
 			                                        </svg>
-			                                      3
+			                                      ${post.likes }
 			                                  </p>
 			
 			                                  <center>
@@ -137,8 +136,6 @@
 			                  <br>
 		                  </c:forEach>
 
-							<br><br>
-		                  
 		              </div>
 		            </div>
 		          </div>

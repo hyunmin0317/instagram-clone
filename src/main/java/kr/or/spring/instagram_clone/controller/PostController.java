@@ -136,25 +136,12 @@ public class PostController {
 						ModelMap model) {
 		
 		List<Post> list = postService.getPosts(start, name);
-		int count = postService.getCount();
-		int pageCount = count / PostService.LIMIT;
-		if(count % PostService.LIMIT > 0)
-			pageCount++;
-		
-		List<Integer> pageStartList = new ArrayList<>();
-		for(int i = 0; i < pageCount; i++) {
-			pageStartList.add(i * PostService.LIMIT);
-		}
 		
 		String loginId = principle.getName();
 		User user = userService.getUserByEmail(loginId);
 		
 		model.addAttribute("user", user.getName());
 		model.addAttribute("list", list);
-		model.addAttribute("count", count);
-		model.addAttribute("pageStartList", pageStartList);
-		
-		System.out.println(name);
 		model.addAttribute("name", name);
 		return "detail";
 	}
@@ -184,4 +171,6 @@ public class PostController {
 		postService.addLikes(likes, user, id);	
 		return "redirect:list";
 	}
+	
+	
 }

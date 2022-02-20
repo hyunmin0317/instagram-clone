@@ -35,13 +35,30 @@ public class PostDao {
 	    
 	    public List<Post> selectAll(Integer start, Integer limit) {
 	    		Map<String, Integer> params = new HashMap<>();
-	        return jdbc.query(SELECT_PAGING, params, rowMapper);
+	    		List<Post> posts = jdbc.query(SELECT_PAGING, params, rowMapper);
+	    		
+	    		   		
+	    		for(Post post : posts) {
+	    			Map<String, Object> param = new HashMap<>();
+	    			param.put("id", post.getId());
+	    			post.setLikes(jdbc.queryForObject(LIKES_COUNT, param, Integer.class));
+	    		}
+	    		
+	        return posts;
 	    }
 	    
 	    public List<Post> selectName(Integer start, Integer limit, String name) {
-    		Map<String, Object> params = new HashMap<>();
-    		params.put("name", name);
-        return jdbc.query(SELECT_PAGING_NAME, params, rowMapper);
+	    	Map<String, String> params = new HashMap<>();
+	    	params.put("name", name);
+    		List<Post> posts = jdbc.query(SELECT_PAGING_NAME, params, rowMapper);
+    		
+    		   		
+    		for(Post post : posts) {
+    			Map<String, Object> param = new HashMap<>();
+    			param.put("id", post.getId());
+    			post.setLikes(jdbc.queryForObject(LIKES_COUNT, param, Integer.class));
+    		}	
+    		return posts;
 	    }
 	    
 

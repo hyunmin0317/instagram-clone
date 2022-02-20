@@ -10,6 +10,7 @@ public class Post {
 	private String content;
 	private String image;
 	private Date date;
+	private int likes;
 
 	public Long getId() {
 		return id;
@@ -66,10 +67,18 @@ public class Post {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	
+	public int getLikes() {
+		return likes;
+	}
+	
+	public void setLikes(int likes) {
+		this.likes = likes;
+	}
 
 	@Override
 	public String toString() {
 		return "Post [Id=" + id + ", userId=" + userId + ", title=" + title + ", content=" + content
-				+ ", image=" + image + ", date=" + date + "]";
+				+ ", image=" + image + ", date=" + date + ", likes="+ likes+ "]";
 	}
 }
