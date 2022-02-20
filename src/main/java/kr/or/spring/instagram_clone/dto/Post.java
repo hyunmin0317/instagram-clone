@@ -11,6 +11,7 @@ public class Post {
 	private String image;
 	private Date date;
 	private int likes;
+	private boolean like;
 
 	public Long getId() {
 		return id;
@@ -75,10 +76,18 @@ public class Post {
 	public void setLikes(int likes) {
 		this.likes = likes;
 	}
+	
+	public boolean getLike() {
+		return like;
+	}
+	
+	public void setLike(boolean like) {
+		this.like = like;
+	}
 
 	@Override
 	public String toString() {
 		return "Post [Id=" + id + ", userId=" + userId + ", title=" + title + ", content=" + content
-				+ ", image=" + image + ", date=" + date + ", likes="+ likes+ "]";
+				+ ", image=" + image + ", date=" + date + ", likes="+ likes+ ", like="+like+"]";
 	}
 }

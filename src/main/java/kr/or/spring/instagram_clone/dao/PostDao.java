@@ -33,15 +33,24 @@ public class PostDao {
 	                .usingGeneratedKeyColumns("postId");
 	    }
 	    
-	    public List<Post> selectAll(Integer start, Integer limit) {
+	    public List<Post> selectAll(Integer start, Integer limit, Long id) {
 	    		Map<String, Integer> params = new HashMap<>();
 	    		List<Post> posts = jdbc.query(SELECT_PAGING, params, rowMapper);
 	    		
 	    		   		
 	    		for(Post post : posts) {
 	    			Map<String, Object> param = new HashMap<>();
-	    			param.put("id", post.getId());
+	    			param.put("post_id", post.getId());
 	    			post.setLikes(jdbc.queryForObject(LIKES_COUNT, param, Integer.class));
+	    			param.put("user_id", id);
+	    			int like = jdbc.queryForObject(LIKE_CHECK, param, Integer.class);
+	    			
+	    			if (like == 0)
+	    				post.setLike(false);
+	    			else
+	    				post.setLike(true);
+	    			
+	    			System.out.println(post);
 	    		}
 	    		
 	        return posts;
@@ -55,7 +64,7 @@ public class PostDao {
     		   		
     		for(Post post : posts) {
     			Map<String, Object> param = new HashMap<>();
-    			param.put("id", post.getId());
+    			param.put("post_id", post.getId());
     			post.setLikes(jdbc.queryForObject(LIKES_COUNT, param, Integer.class));
     		}	
     		return posts;

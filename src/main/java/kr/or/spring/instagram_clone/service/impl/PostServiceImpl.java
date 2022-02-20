@@ -28,8 +28,8 @@ public class PostServiceImpl implements PostService{
 
 	@Override
 	@Transactional
-	public List<Post> getPosts(Integer start) {
-		List<Post> list = postDao.selectAll(start, PostService.LIMIT);
+	public List<Post> getPosts(Integer start, Long id) {
+		List<Post> list = postDao.selectAll(start, PostService.LIMIT, id);
 		return list;
 	}
 	
