@@ -35,8 +35,6 @@ public class PostDao {
 	    
 	    public List<Post> selectAll(Integer start, Integer limit) {
 	    		Map<String, Integer> params = new HashMap<>();
-	    		params.put("start", start);
-	    		params.put("limit", limit);
 	        return jdbc.query(SELECT_PAGING, params, rowMapper);
 	    }
 	    
