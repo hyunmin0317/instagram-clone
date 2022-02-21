@@ -1,8 +1,9 @@
-package kr.or.spring.instagram_clone.service;
+package kr.or.spring.instagram_clone.service.impl;
 
 
 import kr.or.spring.instagram_clone.dao.*;
 import kr.or.spring.instagram_clone.dto.*;
+import kr.or.spring.instagram_clone.service.UserService;
 import kr.or.spring.instagram_clone.service.security.*;
 
 import org.springframework.stereotype.Service;
