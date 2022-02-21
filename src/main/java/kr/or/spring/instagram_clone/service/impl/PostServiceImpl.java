@@ -83,6 +83,9 @@ public class PostServiceImpl implements PostService{
 		postDao.addLikes(likes);
 		return likes;
 	}
-	
-	
+
+	@Override
+	public void deleteLikes(Long post_id, Long user_id) {
+		postDao.deleteLikes(post_id, user_id);
+	}
 }

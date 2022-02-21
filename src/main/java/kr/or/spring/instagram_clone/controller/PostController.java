@@ -48,8 +48,6 @@ public class PostController {
 		String loginId = principal.getName();
 		User user = userService.getUserByEmail(loginId);
 		
-		System.out.println(user.getId());
-		
 		List<Post> list = postService.getPosts(start, user.getId());
 		
 		model.addAttribute("user", user.getName());
@@ -158,6 +156,16 @@ public class PostController {
         User user = userService.getUserByEmail(loginId);
         
 		postService.addLikes(likes, user, id);	
+		return "redirect:list";
+	}
+	
+	@GetMapping(path="/likesdelete")
+	public String likesDelete(@RequestParam(name="id", required=true) Long id, 
+			Principal principle) {
+		String loginId = principle.getName();
+		User user = userService.getUserByEmail(loginId);
+
+		postService.deleteLikes(id, user.getId());
 		return "redirect:list";
 	}
 }

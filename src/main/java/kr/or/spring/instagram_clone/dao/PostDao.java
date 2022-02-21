@@ -49,8 +49,6 @@ public class PostDao {
 	    				post.setLike(false);
 	    			else
 	    				post.setLike(true);
-	    			
-	    			System.out.println(post);
 	    		}
 	    		
 	        return posts;
@@ -92,7 +90,13 @@ public class PostDao {
 			params.put("user_id", likes.getUserId());
 
 			// Insert Query를 위해서 update method를 사용했다.
-			jdbc.update("INSERT INTO likes(post_id, user_id) "
-					+ "VALUES (:post_id, :user_id);", params);
+			jdbc.update("INSERT INTO likes(post_id, user_id) "+ "VALUES (:post_id, :user_id);", params);
+		}
+		
+		public void deleteLikes(Long post_id, Long user_id) {
+			Map<String, Object> params = new HashMap<>();
+			params.put("post_id", post_id);
+			params.put("user_id", user_id);
+			jdbc.update(DELETE_LIKE, params);
 		}
 }

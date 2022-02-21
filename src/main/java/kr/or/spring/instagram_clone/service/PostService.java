@@ -13,5 +13,6 @@ public interface PostService {
 	public int deletePost(Long id, String ip);
 	public Post addPost(Post post, String ip, String image, User user);
 	public Likes addLikes(Likes likes, User user, Long post_id);
+	public void deleteLikes(Long post_id, Long user_id);
 	public int getCount();
 }
