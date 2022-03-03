@@ -9,12 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import kr.or.spring.instagram_clone.dao.PostDao;
-
-import kr.or.spring.instagram_clone.dao.LogDao;
 import kr.or.spring.instagram_clone.dto.Post;
 import kr.or.spring.instagram_clone.dto.User;
 import kr.or.spring.instagram_clone.dto.Likes;
-import kr.or.spring.instagram_clone.dto.Log;
 import kr.or.spring.instagram_clone.service.PostService;
 
 
@@ -22,9 +19,6 @@ import kr.or.spring.instagram_clone.service.PostService;
 public class PostServiceImpl implements PostService{
 	@Autowired
 	PostDao postDao;
-	
-	@Autowired
-	LogDao logDao;
 
 	@Override
 	@Transactional
@@ -44,11 +38,6 @@ public class PostServiceImpl implements PostService{
 	@Transactional(readOnly=false)
 	public int deletePost(Long id, String ip) {
 		int deleteCount = postDao.deleteById(id);
-		Log log = new Log();
-		log.setIp(ip);
-		log.setMethod("delete");
-		log.setRegdate(new Date());
-		logDao.insert(log);
 		return deleteCount;
 	}
 
@@ -59,15 +48,7 @@ public class PostServiceImpl implements PostService{
 		post.setImage(image);
 		post.setUserId(user.getId());
 		post.setUserName(user.getName());
-		
-		Long id = postDao.insert(post);
-		post.setId(id);
-		Log log = new Log();
-		log.setIp(ip);
-		log.setMethod("insert");
-		log.setRegdate(new Date());
-		logDao.insert(log);
-		
+		post.setId(postDao.insert(post));
 		return post;
 	}
 

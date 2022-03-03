@@ -1,22 +1,15 @@
 package kr.or.spring.instagram_clone.controller;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,6 +31,8 @@ public class PostController {
 	PostService postService;
 	@Autowired
 	UserService userService;
+	
+	String imageRoot = "C:\\Users\\choih\\Desktop\\project\\instagram-clone\\src\\main\\webapp\\resources\\img\\";
 
 	@GetMapping(path="/list")
 	public String list(@RequestParam(name="start", required=false, defaultValue="0") int start,
@@ -66,19 +61,7 @@ public class PostController {
 						HttpServletRequest request,
 						Principal principal,
 						@RequestParam("file") MultipartFile file) {
-		
-//		String path = "c:/image";
-//		File Folder = new File(path);
-//		if (!Folder.exists()) {
-//			try{
-//			    Folder.mkdir(); //폴더 생성
-//		    } catch(Exception e){
-//		    	e.getStackTrace();
-//			}        
-//	    }
-		
-//		String path = "c:/tmp/".concat(file.getOriginalFilename());
-		String path = "C:\\Users\\CodeWise\\OneDrive - 몽타 주식회사\\바탕 화면\\Project\\instagram-clone\\src\\main\\webapp\\resources\\img\\"+file.getOriginalFilename();
+		String path = imageRoot+file.getOriginalFilename();
 		
 		String loginId = principal.getName();
         User user = userService.getUserByEmail(loginId);
@@ -93,13 +76,7 @@ public class PostController {
 		System.out.println(path);
 		
         try(
-
-                // 맥일 경우 
-                //FileOutputStream fos = new FileOutputStream("/tmp/" + file.getOriginalFilename());
-                // 윈도우일 경우
                 FileOutputStream fos = new FileOutputStream(path);
-
-
                 InputStream is = file.getInputStream();
         ){
         	    int readCount = 0;
