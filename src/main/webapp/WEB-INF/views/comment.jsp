@@ -83,76 +83,20 @@
 	      </div>
 	    </nav>
 	    
-	<!-- 게시물 -->	
+	<!-- 댓글 달기 -->	
 		<main role="main">
-		      <div class="album bg-light">
-		        <div class="container-sm">
-		            <div class="album py-5 bg-light">
-		              <div class="container">  
-		                  <c:forEach items="${list}" var="post">	
-			                  <div class="row">
-			                      <div class="container">
-			                          <div class="card shadow-sm">
-			                              <a href="/instagram-clone/detail?name=${post.userName}" class="list-group-item">
-											<div>${post.userName }</div>
-			                              </a>
-			                              <img class="card-img-top" src="<spring:url value='/resources/img/${post.image}'/>" alt=" Card image cap"/>
-
-			                              <div class="card-body">
-			 								<h4>${post.title }</h4>
-			                                  <p class="card-text">${post.content }</p>    
-			                                  <p class="card-text">${post.date }</p>
-			                                  <c:if test="${sessionScope.isAdmin == 'true'}"><a href="delete?id=${post.id}">삭제</a><br><br></c:if>
-			
-			                                  <center>
-
-			                                      <div class="col-6 input-group">
-			                                      
-			                                      <c:choose> 
-			                                     <c:when test="${post.like eq true}">
-			                                     
-			                                     	 <a class="btn btn-primary" href="likesdelete?id=${post.id}"class="recommend btn btn-sm btn-secondary btn-block" style="width:10%;">
-			                                          	 	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-			                                                  <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-			                                                </svg>	 
-			                                                ${post.likes }                	
-			                                          </a>    	 
-			                                      </c:when>
-	 	
-			                                     <c:otherwise>
-			                                     
-			                                          	 <a class="btn btn-primary" href="likes?id=${post.id}" class="recommend btn btn-sm btn-secondary btn-block" style="width:10%;">     
-			                                          	 	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-			                                                   <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
-			                                               	</svg>  
-			                                               	${post.likes }
-			                                             </a>
-			                                      </c:otherwise>      	 
-			                                   	</c:choose>      
-			                                      
-											            <input type="text" class="form-control" width="60%">
-											            <div class="input-group-append">
-											                <button class="btn btn-primary" type="button" id="btn_search">
-											                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-											                      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-											                    </svg>
-											                </button>
-											            </div>
-											        </div>
-			                                  </center>
-			                              
-			                              </div>
-			                          </div>
-			                      </div>
-			                  </div>
-			                  <br>
-		                  </c:forEach>
-
-		              </div>
-		            </div>
-		          </div>
-		        </div>
-		      </div>
+			<div class="container my-3">
+			    <h5 class="border-bottom pb-2">댓글등록하기</h5>
+			    <form method="post" class="post-form my-3">
+			        <div class="form-group">
+			            <label for="content">댓글내용</label>
+			            <textarea class="form-control"name="content" id="content"
+			                      rows="3"></textarea>
+			        </div>
+			        <button type="submit" class="btn btn-primary">저장하기</button>
+			    </form>
+			</div>
+		      
 		</main>
 	
     <!-- Optional JavaScript; choose one of the two! -->

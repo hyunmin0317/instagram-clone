@@ -11,8 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.or.spring.instagram_clone.dao.PostDao;
 import kr.or.spring.instagram_clone.dto.Post;
 import kr.or.spring.instagram_clone.dto.User;
-import kr.or.spring.instagram_clone.dto.Likes;
 import kr.or.spring.instagram_clone.service.PostService;
+import kr.or.spring.instagram_clone.dto.Comment;
+import kr.or.spring.instagram_clone.dto.Likes;
 
 
 @Service
@@ -68,5 +69,15 @@ public class PostServiceImpl implements PostService{
 	@Override
 	public void deleteLikes(Long post_id, Long user_id) {
 		postDao.deleteLikes(post_id, user_id);
+	}
+	
+	@Override
+	public Comment addComment(Comment comment, User user, Long post_id, String content) {
+		comment.setUserId(user.getId());
+		comment.setPostId(post_id);
+		comment.setUserName(user.getName());
+		comment.setContent(content);
+		postDao.addComment(comment);
+		return comment;
 	}
 }

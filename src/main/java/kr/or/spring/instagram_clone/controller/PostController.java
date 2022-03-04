@@ -145,4 +145,14 @@ public class PostController {
 		postService.deleteLikes(id, user.getId());
 		return "redirect:list";
 	}
+
+	@GetMapping(path="/comment")
+	public String comment(@RequestParam(name="id", required=true) Long id) {
+		return "comment";
+	}
+	
+	@GetMapping(path="/comment/upload")
+	public String commentUpload(@RequestParam(name="id", required=true) Long id) {
+		return "upload";
+	}
 }
