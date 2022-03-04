@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
+import kr.or.spring.instagram_clone.dto.Comment;
 import kr.or.spring.instagram_clone.dto.Likes;
 import kr.or.spring.instagram_clone.dto.Post;
 
@@ -69,8 +70,8 @@ public class PostDao {
 	    }
 	    
 
-		public Long insert(Post guestbook) {
-			SqlParameterSource params = new BeanPropertySqlParameterSource(guestbook);
+		public Long insert(Post post) {
+			SqlParameterSource params = new BeanPropertySqlParameterSource(post);
 			return insertAction.executeAndReturnKey(params).longValue();
 		}
 		
@@ -98,5 +99,16 @@ public class PostDao {
 			params.put("post_id", post_id);
 			params.put("user_id", user_id);
 			jdbc.update(DELETE_LIKE, params);
+		}
+		
+		public void addComment(Comment comment) {
+			Map<String, Object> params = new HashMap<>();
+			params.put("user_id", comment.getUserId());
+			params.put("post_id", comment.getPostId());
+			params.put("user_name", comment.getUserName());
+			params.put("content", comment.getContent());
+
+			// Insert Query를 위해서 update method를 사용했다.
+			jdbc.update("INSERT INTO comment(user_id, post_id, user_name, content) "+ "VALUES (:user_id, :post_id, :user_name, :content);", params);
 		}
 }
