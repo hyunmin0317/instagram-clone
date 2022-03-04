@@ -129,17 +129,24 @@
 			                                             </a>
 			                                      </c:otherwise>      	 
 			                                   	</c:choose>      
-			                                      
-											            <input type="text" class="form-control" width="60%">
-											            <div class="input-group-append">
-											                <button class="btn btn-primary" type="button" id="btn_search">
-											                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-											                      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-											                    </svg>
-											                </button>
-											            </div>
+			                                   	<form action="comment?id=${post.id}" method="post" >
+				                                   	<input type="text" name="content" width="80%" />
+				                                   	<input type="submit" value="게시" width="10%" />
+			                                   	</form>				
+			                                   	 </center>				                                   	
+			                                   	                       
+			                                   	<div class="mt-3">
+			                                   	<c:forEach items="${post.comments}" var="comment">                                			                  		
+			                                   	<div class="comment py-2 text-muted">
+		                                            <span>
+		                                              ${ comment.userName } - ${ comment.content }, ${ comment.date }
+		                                            </span> 
+		                                        </div>               	
+			                                   	</c:forEach>    
+			                                   	</div>
+			                                   	  <!-- </div>    -->
 											        </div>
-			                                  </center>
+			                                 
 			                              
 			                              </div>
 			                          </div>

@@ -30,8 +30,8 @@ public class PostServiceImpl implements PostService{
 	
 	@Override
 	@Transactional
-	public List<Post> getPosts(Integer start, String name) {
-		List<Post> list = postDao.selectName(start, PostService.LIMIT, name);
+	public List<Post> getPosts(Integer start, String name, Long id) {
+		List<Post> list = postDao.selectName(start, PostService.LIMIT, name, id);
 		return list;
 	}
 
@@ -72,11 +72,11 @@ public class PostServiceImpl implements PostService{
 	}
 	
 	@Override
-	public Comment addComment(Comment comment, User user, Long post_id, String content) {
+	public Comment addComment(Comment comment, User user, Long post_id) {
 		comment.setUserId(user.getId());
 		comment.setPostId(post_id);
 		comment.setUserName(user.getName());
-		comment.setContent(content);
+		comment.setDate(new Date());
 		postDao.addComment(comment);
 		return comment;
 	}

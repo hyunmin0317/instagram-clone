@@ -1,6 +1,7 @@
 package kr.or.spring.instagram_clone.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class Post {
 	private Long id;
@@ -12,6 +13,7 @@ public class Post {
 	private Date date;
 	private int likes;
 	private boolean like;
+	private List<Comment> comments;
 
 	public Long getId() {
 		return id;
@@ -85,9 +87,18 @@ public class Post {
 		this.like = like;
 	}
 
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
 	@Override
 	public String toString() {
-		return "Post [Id=" + id + ", userId=" + userId + ", title=" + title + ", content=" + content
-				+ ", image=" + image + ", date=" + date + ", likes="+ likes+ ", like="+like+"]";
+		return "Post [id=" + id + ", userId=" + userId + ", userName=" + userName + ", title=" + title + ", content="
+				+ content + ", image=" + image + ", date=" + date + ", likes=" + likes + ", like=" + like
+				+ ", comments=" + comments + "]";
 	}
 }

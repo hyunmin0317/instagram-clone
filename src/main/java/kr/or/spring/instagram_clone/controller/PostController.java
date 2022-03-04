@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kr.or.spring.instagram_clone.dto.Comment;
 import kr.or.spring.instagram_clone.dto.Likes;
 import kr.or.spring.instagram_clone.dto.Post;
 import kr.or.spring.instagram_clone.dto.User;
@@ -49,6 +50,21 @@ public class PostController {
 		model.addAttribute("list", list);
 		
 		return "list";
+	}
+	
+	@GetMapping(path="/detail")
+	public String detail(@RequestParam(name="name", required=true) String name,
+						@RequestParam(name="start", required=false, defaultValue="0") int start,
+						Principal principle,
+						ModelMap model) {
+		String loginId = principle.getName();
+		User user = userService.getUserByEmail(loginId);
+		
+		List<Post> list = postService.getPosts(start, name, user.getId());
+		model.addAttribute("user", user.getName());
+		model.addAttribute("list", list);
+		model.addAttribute("name", name);
+		return "detail";
 	}
 	
 	@GetMapping(path="/upload")
@@ -93,24 +109,6 @@ public class PostController {
 		return "redirect:list";
 	}
 	
-	@GetMapping(path="/detail")
-	public String detail(@RequestParam(name="name", required=true) String name,
-						@RequestParam(name="start", required=false, defaultValue="0") int start,
-						Principal principle,
-						ModelMap model) {
-		
-		List<Post> list = postService.getPosts(start, name);
-		
-		String loginId = principle.getName();
-		User user = userService.getUserByEmail(loginId);
-		
-		model.addAttribute("user", user.getName());
-		model.addAttribute("list", list);
-		model.addAttribute("name", name);
-		return "detail";
-	}
-        
-	
 	@GetMapping(path="/delete")
 	public String delete(@RequestParam(name="id", required=true) Long id, 
 			             @SessionAttribute("isAdmin") String isAdmin,
@@ -151,8 +149,13 @@ public class PostController {
 		return "comment";
 	}
 	
-	@GetMapping(path="/comment/upload")
-	public String commentUpload(@RequestParam(name="id", required=true) Long id) {
-		return "upload";
+	@PostMapping(path="/comment")
+	public String commentUpload(@ModelAttribute Comment comment,
+						@RequestParam(name="id", required=true) Long id,
+						Principal principal) {
+		String loginId = principal.getName();
+        User user = userService.getUserByEmail(loginId);
+		postService.addComment(comment, user, id);
+		return "redirect:list";
 	}
 }

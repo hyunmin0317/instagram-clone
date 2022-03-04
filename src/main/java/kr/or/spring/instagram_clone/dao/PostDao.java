@@ -26,7 +26,9 @@ public class PostDao {
 	 private NamedParameterJdbcTemplate jdbc;
 	    private SimpleJdbcInsert insertAction;
 	    private RowMapper<Post> rowMapper = BeanPropertyRowMapper.newInstance(Post.class);
+	    private RowMapper<Comment> rowMapper2 = BeanPropertyRowMapper.newInstance(Comment.class);
 
+	    
 	    public PostDao(DataSource dataSource) {
 	        this.jdbc = new NamedParameterJdbcTemplate(dataSource);
 	        this.insertAction = new SimpleJdbcInsert(dataSource)
@@ -45,6 +47,7 @@ public class PostDao {
 	    			post.setLikes(jdbc.queryForObject(LIKES_COUNT, param, Integer.class));
 	    			param.put("user_id", id);
 	    			int like = jdbc.queryForObject(LIKE_CHECK, param, Integer.class);
+	    			post.setComments(jdbc.query(SELECT_COMMENT, param, rowMapper2));
 	    			
 	    			if (like == 0)
 	    				post.setLike(false);
@@ -55,7 +58,7 @@ public class PostDao {
 	        return posts;
 	    }
 	    
-	    public List<Post> selectName(Integer start, Integer limit, String name) {
+	    public List<Post> selectName(Integer start, Integer limit, String name, Long id) {
 	    	Map<String, String> params = new HashMap<>();
 	    	params.put("name", name);
     		List<Post> posts = jdbc.query(SELECT_PAGING_NAME, params, rowMapper);
@@ -65,6 +68,14 @@ public class PostDao {
     			Map<String, Object> param = new HashMap<>();
     			param.put("post_id", post.getId());
     			post.setLikes(jdbc.queryForObject(LIKES_COUNT, param, Integer.class));
+    			param.put("user_id", id);
+    			int like = jdbc.queryForObject(LIKE_CHECK, param, Integer.class);
+    			post.setComments(jdbc.query(SELECT_COMMENT, param, rowMapper2));
+    			
+    			if (like == 0)
+    				post.setLike(false);
+    			else
+    				post.setLike(true);
     		}	
     		return posts;
 	    }
@@ -107,8 +118,9 @@ public class PostDao {
 			params.put("post_id", comment.getPostId());
 			params.put("user_name", comment.getUserName());
 			params.put("content", comment.getContent());
-
+			params.put("date", comment.getDate());
+			
 			// Insert Query를 위해서 update method를 사용했다.
-			jdbc.update("INSERT INTO comment(user_id, post_id, user_name, content) "+ "VALUES (:user_id, :post_id, :user_name, :content);", params);
+			jdbc.update("INSERT INTO comment(user_id, post_id, user_name, content, date) "+ "VALUES (:user_id, :post_id, :user_name, :content, :date);", params);
 		}
 }
