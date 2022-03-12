@@ -1,0 +1,687 @@
+a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+html, body, #root {
+    height: 100%;
+}
+
+body {
+    background: #fff;
+    line-height: 1;
+    overflow-y: scroll;
+}
+
+main {
+    display: block;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #00376b;
+}
+
+/* svg {
+    color: rgb(142, 142, 142);
+    fill: rgb(142, 142, 142);
+    height: 16;
+    width: 16;
+} */
+
+/* form {
+    display: block;
+    margin-top: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+} */
+
+body, button, input, textarea {
+    color: #262626;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+#root, article, div, footer, header, main, nav, section {
+    border: 0 solid #000;
+    display: flex;
+    align-items: stretch;
+    margin: 0;
+    padding: 0;
+    flex-direction: column;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.whole {
+    min-height: 100vh;
+}
+
+.main {
+    background-color: #fafafa;
+    order: 4;
+}
+
+._main {
+    padding: 30px 20px 0;
+    width: 100%;
+    min-width: 736px;
+    max-width: 935px;
+    width: calc(100% - 40px);
+    margin-bottom: 0;
+    margin: 0 auto 30px;
+}
+
+/* header */
+
+.head {
+    margin-bottom: 44px;
+    flex-direction: row;
+    height: 150px;
+}
+
+/* 프로필 사진 */
+
+.head_img {
+    margin-right: 30px;
+    width: 263.2px;
+}
+
+._head_img {
+    justify-content: center;
+    align-items: center;
+    display: block;
+    align-self: center;
+}
+
+.pro_link {
+    width: 150px;
+    height: 150px;
+    background-color: #fafafa;
+    border-radius: 50%;
+    display: block;
+}
+
+._pro_img {
+    height: 100%;
+    width: 100%;
+    border: 1px solid rgba(0,0,0,.0975);
+    border-radius: 50%;
+}
+
+/* 아이디, 프로필편집, 설정, 게시물/팔로워/팔로우 수, 이름, 설명 */
+
+.head_info {
+    min-width: 0;
+    color: #262626;
+    margin: 0;
+    padding: 0;
+    flex-direction: column;
+}
+
+.head_fst {
+    margin-bottom: 20px;
+    min-width: 736px;
+    flex-direction: row;
+    align-items: center;
+}
+
+/* 아이디 */
+.id {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #262626;
+    font-weight: 300;
+    font-size: 28px;
+    line-height: 32px;
+    margin: -5px 0 -6px;
+}
+
+/* 프로필 편집 */
+
+.edit {
+    margin-left: 20px;
+    display: flex;
+    flex: 0 1 auto;
+}
+
+._edit {
+    min-height: 0;
+    min-width: 0;
+}
+
+.profile_edit {
+    background-color: transparent;
+    border: 1px solid #dbdbdb;
+    color: #262626;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 5px 9px;
+    text-align: center;
+    width: auto;
+    text-decoration: none;
+}
+
+/* 설정 버튼 */
+.setting {
+    margin-left: 5px;
+}
+
+._setting {
+    cursor: pointer;
+    justify-content: center;
+    padding: 8px;
+    background: 0 0;
+    border: 0;
+}
+
+._set {
+    justify-content: center;
+}
+
+._8-yf5 {
+    display: block;
+    color: #000;
+
+}
+
+/* 게시물/팔로워/팔로우 수 */
+
+.head_snd {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+.head_inf {
+    margin-left: 0;
+    font-size: 16px;
+    margin-right: 40px;
+}
+
+/* .itg {
+    
+} */
+
+.g47SY {
+    color: #262626;
+    font-weight: 600;
+}
+
+/* 이름, 설명 */
+.head_trd {
+    display: block;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.name {
+    display: inline;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.story {
+    height: 130px;
+    margin-bottom: 44px;
+}
+
+.story_whole {
+    height: 100%;
+    width: 100%;
+}
+
+._story {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.-story, ._story {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.vi798 {
+    display: flex;
+    flex-direction: row;
+}
+
+.tmxhf {
+    position: absolute;
+}
+
+._tmxhf {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+} 
+
+.wlsWk {
+    padding: 10px 15px;
+    width: 115px;
+    display: flex;
+    align-items: center;
+}
+
+.txfbtn {
+    display: block;
+}
+
+.tytvm {
+    background-color: #fafafa;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+}
+
+.vmtk {
+    height: 100%;
+    width: 100%;
+}
+
+.exle {
+    font-weight: 600;
+    padding-top: 15px;
+    cursor: pointer;
+    display: block;
+    overflow: hidden;
+    text-align: center;
+    width: 100%;
+}
+
+/* menu */
+
+.menu {
+    align-items: center;
+    border-top: 1px solid #dbdbdb;
+    color: #8e8e8e;
+    display: flex;
+    flex-direction: row;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    justify-content: center;
+}
+
+.menutab:not(:last-child) {
+    margin-right: 60px;
+}
+
+.menutab {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    height: 52px;
+    justify-content: center;
+    text-transform: uppercase;
+}
+
+.mainpost {
+    align-items: center;
+    color: #262626;
+    border-top: 1px solid#262626;
+    margin-top: -1px;
+}
+
+.sdfjF {
+    align-items: center;
+    display: flex;
+}
+
+._8-yf5 {
+    display: block;
+    position: relative;
+}
+
+.dlkf {
+    margin-left: 6px;
+}
+
+.ybxxX {
+    display: flex;
+    flex: 0 0 auto;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
+}
+
+.Widd_ {
+    margin-left: 6px;
+}
+
+.ffkd_ {
+    align-items: center;
+    display: flex;
+}
+
+._dkfjd {
+    margin-left: 6px;
+}
+
+/* navigation */
+
+.navigation {
+    background-color: #fafafa;
+    padding: 0;
+    order: 0;
+}
+
+.nav_aria {
+    flex-basis: 55px;
+}
+
+/* .nav {
+
+} */
+
+._nav {
+    align-items: center;
+    background-color: #fff;
+    border-bottom: 1px solid #dbdbdb;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+}
+
+._navg {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    max-width: 975px;
+    padding: 0 20px;
+    height: 60px;
+    width: 100%;
+    z-index: 10;
+}
+
+/* 인스타 로고 */
+
+.insta_logo {
+    flex: 1 0 127px;
+}
+
+.logo {
+    flex: 0 0 auto;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
+}
+
+._logo {
+    margin-top: 7px;
+}
+
+.Insta {
+    max-height: 100%;
+    max-width: 100%;   
+}
+
+/* 검색창 */
+
+.search {
+    border-radius: 8px;
+    align-items: center;
+    display: flex;
+    flex: 0 1 auto;
+    height: 36px;
+    min-width: 125px;
+    width: 268px;
+}
+
+._search {
+    background: #efefef;
+    font-size: 16px;
+    border: 0;
+    padding: 3px 16px;
+    color: #262626;
+    outline: 0;
+    z-index: 2;
+    border-radius: 8px;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+}
+
+.rjator {
+    background: #efefef;
+    font-size: 16px;
+    padding: 0 16px;
+    color: #8e8e8e;
+    cursor: text;
+    font-weight: 300;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    text-align: left;
+    top: 0;
+    z-index: 2;
+    border-radius: 8px;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+}
+
+.rjator_ {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.sch_icon {
+    margin-right: 12px;
+}
+
+.fdlknf {
+    display: block;
+    position: relative;
+    color: rgb(142, 142, 142);
+    fill: rgb(142, 142, 142);
+    height: 16;
+    width: 16;
+}
+
+.sch_text {
+    line-height: 25px;
+    display: inline-block;
+    max-width: 140px;
+    overflow: hidden;   
+    text-overflow: ellipsis;
+    vertical-align: bottom;
+}
+
+.rjaenf {
+    top: 12px;
+    width: 375px;
+}
+
+/* 네비게이션 아이콘들 */
+
+.navicon {
+    flex: 1 0 127px;
+    align-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.icons {
+    display: flex;
+    flex-direction: row;
+    padding-left: 24px;
+}
+ 
+.icon:not(:first-child) {
+    margin-left: 22px;
+}
+
+/* 홈 */
+
+._8-yf5 {
+    display: block;
+    position: relative;
+}
+
+/* DM */
+
+.directmsg {
+    position: relative;
+}
+
+.new_dir {
+    right: -8px;
+    top: -6px;
+    position: absolute;
+}
+
+._new_dir {
+    background-color: #ed4956;
+    align-items: center;
+    border-radius: 100px;
+    color: #fff;
+    font-size: 11px;
+    height: 18px;
+    justify-content: center;
+    min-width: 18px;
+}
+
+.dirnum {
+    padding: 0 3px;
+}
+
+/* new post */
+
+.vhtmx {
+    position: relative;
+}
+
+.post_btn {
+    padding: 0;
+    align-items: center;
+    background: 0 0;
+    border: 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+}
+
+.vhqjn {
+    align-items: center;
+    justify-content: center;
+}
+
+.pdfd {
+    top: 15px;
+}
+
+/* 나침반 */
+
+/* heart */
+
+.udfdf {
+    left: 50%;
+    position: absolute;
+    top: 48px;
+}
+
+/* my profile */
+
+/* .wwwGr {
+    border: 1px solid #262626;
+    border-radius: 50%;
+    height: 28px;
+    width: 28px;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+} 이거 ㅗ왜 이래 */
+
+.myproicon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    background-color: #fafafa;
+    border-radius: 50%;
+    box-sizing: border-box;
+    display: block;
+    overflow: hidden;
+    position: relative;
+}
+
+._myproicon {
+    height: 100%;
+    width: 100%;
+}
+
+/* my post */
+
+.my_post {
+    flex-grow: 1;
+}
+
+._mypost {
+    margin-bottom: 28px;
+    flex-direction: row;
+}
+
+.vhtmxm:last-child {
+    margin-right: 0;
+}
+
+.vhtmxm {
+    margin-right: 28px;
+    display: block;
+    width: 100%;
+    position: relative;
+    flex: 1 0 0%;
+}
+
+.elaos {
+    background-color: #efefef;
+    display: block;
+    width: 100%;
+}
+
+.post-img {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 100%;
+}
+
+.FFVAD {
+    object-fit: cover;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+._9ahhh {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+

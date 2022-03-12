@@ -27,6 +27,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .logout().logoutSuccessUrl("/")
                 .and()
                     .oauth2Login()      // OAuth 2 로그인 기능에 대한 설정의 진입점
+                    .loginPage("/")
+                    .defaultSuccessUrl("/main")
+                    .failureUrl("/")
                     .userInfoEndpoint() // OAuth 2 로그인 성공 이후 사용자 정보를 가져올 때의 설정 담당
                     // 소셜 로그인 성공 시 후속 조치를 진행할 UserService 인터페이스의 구현체를 등록
                     .userService(customOAuth2UserService); 

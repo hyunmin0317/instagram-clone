@@ -17,10 +17,15 @@ import javax.servlet.http.HttpSession;
 public class IndexController {
 
     private final PostsService postsService;
-    private final HttpSession httpSession;
+
+
+    @GetMapping("/")
+    public String login() {
+        return "login";
+    }
 
     // @LoginUser 를 사용하여 세션 정보를 갖고 옴
-    @GetMapping("/")
+    @GetMapping("/main")
     public String index(Model model, @LoginUser SessionUser user) {  // 서버 템플릿 엔진에서 사용할 수 있는 객체를 저장
         model.addAttribute("posts", postsService.findAllDesc());
 
