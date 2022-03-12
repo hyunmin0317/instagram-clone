@@ -24,6 +24,11 @@ public class IndexController {
         return "login";
     }
 
+    @GetMapping("/signup")
+    public String signup() {
+        return "signup";
+    }
+
     // @LoginUser 를 사용하여 세션 정보를 갖고 옴
     @GetMapping("/main")
     public String index(Model model, @LoginUser SessionUser user) {  // 서버 템플릿 엔진에서 사용할 수 있는 객체를 저장
