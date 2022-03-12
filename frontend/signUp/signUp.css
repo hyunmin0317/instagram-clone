@@ -1,0 +1,317 @@
+a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+body, button, input, textarea {
+    color: #262626;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+html, body, #root {
+    height: 100%;
+}
+
+#root, div, footer, header, main, nav, section {
+    border: 0 solid #000;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #fff;
+    overflow-y: scroll;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    display: block;
+}
+
+#root {
+    z-index: 0;
+    margin: 0;
+    padding: 0;
+}
+
+._root {
+    min-height: 100vh;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    /* border: 0 solid #000; */
+}
+
+.main {
+    background-color: #fafafa;
+}
+
+._main {
+    display: flex;
+    min-height: 100%;
+    min-width: 0;
+    overflow: hidden;
+    margin-bottom: 44px;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+}
+
+.midd {
+    color: #262626;
+    margin-top: 12px;
+    max-width: 350px;
+    justify-content: center;
+}
+
+.content {
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 1px;
+    margin: 0 0 10px;
+    padding: 10px 0;
+}
+
+/* .insta {
+    margin: 22px auto 12px;
+    background-repeat: no-repeat;
+    background-position: 0 -130px;
+    height: 51px;
+    width: 175px;
+} */
+
+.instalogo {
+    display: block;
+    /* margin: 19px auto 11px; */
+    margin-top: 19px;
+    margin-right: auto;
+    margin-bottom: 11px;
+    margin-left: auto;
+    background-repeat: no-repeat;
+    background-position: 0 -130px;
+    height: 54px;
+    width: 188px;
+}
+
+.signup {
+    margin-bottom: 20px;
+    /*margin-top: 12px;
+    max-width: 350px;*/
+}
+
+.signup-form {
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+}
+
+.exp {
+    color: #8e8e8e;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 20px;
+    margin: 0 40px 10px;
+    text-align: center;
+}
+
+.face-log {
+    margin-top: 8px;
+    margin-right: 40px;
+    margin-left: 40px;
+    margin-bottom: 8px;
+    justify-content: flex-start;
+    display: flex;
+    height: 31.6px;
+}
+
+.face-btn {
+    background-color: #0095f6;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 5px 9px;
+    text-align: center;
+    width: auto;
+    height: 31.6px;
+
+}
+
+/* ._face-btn {
+    /* display: inline-block;
+    margin-right: 8px;
+    top: 3px;
+    height: 16px;
+    width: 16px;
+    color: #fff;
+} */
+
+.O_r {
+    margin: 10px 40px 18px;
+    flex-direction: row;
+}
+
+/* 이해가 필요해ㅐ */
+.O_rline {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    -webkit-flex-shrink: 1;
+    -ms-flex-negative: 1;
+    flex-shrink: 1;
+    position: relative;
+    background-color: #dbdbdb;
+    height: 1px;
+    top: 0.45em;
+}
+
+.O_rtext {
+    color: #8e8e8e;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 15px;
+    margin: 0 18px;
+
+}
+
+.form {
+    margin: 0 40px 6px;
+}
+
+.form-group {
+    align-items: center;
+    background: #fafafa;
+    box-sizing: border-box;
+    border: 1px solid #dbdbdb;
+    color: #262626;
+    display: flex;
+    flex-direction: row;
+    border-radius: 3px;
+    font-size: 14px;
+    width: 100%;
+}
+
+._form_group {
+    display: flex;
+    height: 36px;
+    margin: 0;
+    min-width: 0;
+    padding: 0;
+    flex: 1 0 0;
+    position: relative;
+    cursor: text;
+    /* 마우스 드래그 방지 */
+    -ms-user-select: none; 
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+._9nyy2 {
+    color: #8e8e8e;
+    font-size: 12px;
+    height: 36px;
+    left: 8px;
+    right: 0;
+    line-height: 36px;
+    overflow: hidden;
+    position: absolute;
+    text-overflow: ellipsis;
+}
+
+.form-control {
+    font-size: 16px;
+    background: #fafafa;
+    border: 0;
+    margin: 0;
+    padding: 9px 0 7px 8px;
+    outline: 0;
+    flex: 1 0 auto;
+    overflow: hidden;
+    /* cursor: text; */
+}
+
+.button {
+    margin-top: 8px;
+    margin-right: 40px;
+    margin-left: 40px;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.btn {
+    background-color: #0095f6;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 5px 9px;
+    text-align: center;
+    text-overflow: ellipsis;
+    width: 100%;
+    line-height: 18px;
+    margin: 0;
+}
+
+.login {
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 1px;
+    margin: 0 0 10px;
+    padding: 10px 0;
+}
+
+._login {
+    color: #262626;
+    font-size: 14px;
+    margin: 15px;
+    text-align: center;
+}
+
+._login>a {
+    color: #0095f6;
+    text-decoration: none;
+}
+
+/* .appdown {
+    
+} */
+
+._appdown {
+    color: #262626;
+    font-size: 14px;
+    line-height: 18px;
+    margin: 10px 20px 10px 20px;
+    text-align: center;
+}
+
+.applink {
+    justify-content: center;
+    margin: 10px 0 10px 0;
+    flex-direction: row;
+}
+
+.store {
+    margin-right: 8px;
+}
+
+.store_img {
+    height: 40px;
+    cursor: pointer;
+}
