@@ -1,0 +1,121 @@
+var main = {
+    init : function () {
+        var _this = this;
+        $('#btn-save').on('click', function () {
+            _this.save();
+        });
+
+        $('#btn-update').on('click', function () {
+            _this.update();
+        });
+
+        $('#btn-delete').on('click', function () {
+            _this.delete();
+        });
+
+        $('#signup').on('click', function () {
+            _this.signup();
+        });
+
+        $('#login').on('click', function () {
+            _this.login();
+        });
+    },
+    save : function () {
+        var data = {
+            title: $('#title').val(),
+            // author: $('#author').val(),
+            content: $('#content').val()
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/v1/posts',
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function() {
+            alert('글이 등록되었습니다.');
+            window.location.href = '/main';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+    update : function () {
+        var data = {
+            title: $('#title').val(),
+            content: $('#content').val()
+        };
+
+        var id = $('#id').val();
+
+        $.ajax({
+            type: 'PUT',
+            url: '/api/v1/posts/'+id,
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function() {
+            alert('글이 수정되었습니다.');
+            window.location.href = '/main';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+    delete : function () {
+        var id = $('#id').val();
+
+        $.ajax({
+            type: 'DELETE',
+            url: '/api/v1/posts/'+id,
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8'
+        }).done(function() {
+            alert('글이 삭제되었습니다.');
+            window.location.href = '/main';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+    signup : function () {
+        var data = {
+            name: $('#name').val(),
+            username: $('#username').val(),
+            password: $('#password').val(),
+            email: $('#email').val()
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/user/signup',
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function() {
+            alert('회원가입 성공');
+            window.location.href = '/';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+    login : function () {
+        var data = {
+            username: $('#username').val(),
+            email: $('#password').val()
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/loginform',
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function() {
+            alert('환영합니다.');
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    }
+};
+
+main.init();
