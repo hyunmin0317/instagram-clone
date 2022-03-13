@@ -19,7 +19,6 @@
                         <!-- <h1 class="insta">Instagram</h1> -->
                         <img class="instalogo" src="/images/static/인스타로고.png">
                         <div class="signup">
-                            <form class="signup-form">
                                 <h2 class="exp">친구들의 사진과 동영상을 보려면 가입하세요.</h2>
                                 <!-- facebook -->
                                 <div class="face-log">
@@ -35,20 +34,22 @@
                                     <div class="O_rtext">또는</div>
                                     <div class="O_rline"></div>
                                 </div>
+                            <form>
                                 <div class="form">
                                     <div class="form-group">
                                         <label class="_form_group">
                                             <span class="_9nyy2">휴대폰 번호 또는 이메일 주소</span>
-                                            <input aria-lable="휴대폰 번호 또는 이메일 주소" autocomplete="tel" autocorrect="off" aria-required="true" name="emailOrPhone" type="text" class="form-control">
+                                            <input id="email" type="text" class="form-control">
                                         </label>
                                         <div class="i24fI"></div>
                                     </div>
                                 </div>
+
                                 <div class="form">
                                     <div class="form-group">
                                         <label class="_form_group">
                                             <span class="_9nyy2">성명</span>
-                                            <input aria-label="성명" aria-required="false" autocapitalize="sentences" autocorrect="off" name="fullName" type="text" class="form-control">
+                                            <input id="name" type="text" class="form-control">
                                         </label>
                                         <div class="i24fI"></div>
                                     </div>
@@ -57,7 +58,7 @@
                                     <div class="form-group">
                                         <label class="_form_group">
                                             <span class="_9nyy2">사용자 이름</span>
-                                            <input aria-label="사용자 이름" aria-required="true" autocapitalize="off" autocorrect="off" maxlength="30" name="username" type="text" class="form-control">
+                                            <input id="username" type="text" class="form-control">
                                         </label>
                                         <div class="i24fI"></div>
                                     </div>
@@ -66,14 +67,14 @@
                                     <div class="form-group">
                                         <label class="_form_group">
                                             <span class="_9nyy2">비밀번호</span>
-                                            <input aria-label="비밀번호" aria-required="true" autocapitalize="off" autocomplete="new-password" autocorrect="off" name="password" type="password" class="form-control">
+                                            <input id="password" type="password" class="form-control">
                                         </label>
                                         <div class="i24fI"></div>
                                     </div>
                                 </div>
                                 <div>
                                     <div class="button">
-                                        <button type="submit" class="btn" onclick="">가입</button>
+                                        <button id="signup" type="submit" class="btn" onclick="">가입</button>
                                     </div>
                                 </div>
                             </form>
@@ -103,5 +104,4 @@
         </main>
     </section>
 </div>
-</body>
-</html>
+{{>layout/footer}}

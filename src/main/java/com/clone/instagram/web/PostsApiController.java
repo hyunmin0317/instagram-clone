@@ -4,6 +4,7 @@ import com.clone.instagram.config.auth.LoginUser;
 import com.clone.instagram.config.auth.dto.SessionUser;
 import com.clone.instagram.domain.user.User;
 import com.clone.instagram.service.posts.UserService;
+import com.clone.instagram.web.dto.UserLoginDto;
 import lombok.RequiredArgsConstructor;
 import com.clone.instagram.service.posts.PostsService;
 import com.clone.instagram.web.dto.PostsResponseDto;
@@ -40,5 +41,10 @@ public class PostsApiController {
     public Long delete(@PathVariable Long id) {
         postsService.delete(id);
         return id;
+    }
+
+    @PostMapping("/user/signup")
+    public boolean save(@RequestBody UserLoginDto userLoginDto) {
+        return userService.save(userLoginDto);
     }
 }

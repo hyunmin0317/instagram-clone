@@ -12,6 +12,10 @@ var main = {
         $('#btn-delete').on('click', function () {
             _this.delete();
         });
+
+        $('#signup').on('click', function () {
+            _this.signup();
+        });
     },
     save : function () {
         var data = {
@@ -68,8 +72,27 @@ var main = {
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
-    }
+    },
+    signup : function () {
+        var data = {
+            name: $('#name').val(),
+            username: $('#username').val(),
+            email: $('#email').val()
+        };
 
+        $.ajax({
+            type: 'POST',
+            url: '/user/signup',
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function() {
+            alert('환영합니다.');
+            window.location.href = '/main';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    }
 };
 
 main.init();
