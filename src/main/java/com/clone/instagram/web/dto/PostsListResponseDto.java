@@ -1,5 +1,6 @@
 package com.clone.instagram.web.dto;
 
+import com.clone.instagram.domain.user.User;
 import lombok.Getter;
 import com.clone.instagram.domain.posts.Posts;
 
@@ -9,7 +10,7 @@ import java.time.LocalDateTime;
 public class PostsListResponseDto {
     private Long id;
     private String title;
-    private String author;
+    private User author;
     private LocalDateTime modifiedDate;
 
     public PostsListResponseDto(Posts entity) {

@@ -1,5 +1,6 @@
 package com.clone.instagram.web.dto;
 
+import com.clone.instagram.domain.user.User;
 import lombok.Getter;
 import com.clone.instagram.domain.posts.Posts;
 
@@ -9,7 +10,7 @@ public class PostsResponseDto {
     private Long id;
     private String title;
     private String content;
-    private String author;
+    private User author;
 
     public PostsResponseDto(Posts entity) {
         this.id = entity.getId();

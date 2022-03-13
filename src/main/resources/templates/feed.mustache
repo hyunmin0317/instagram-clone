@@ -150,7 +150,7 @@
                                 </a>
                             </div>
                             <div class="wtidzone" aria-disabled="true" role="button">
-                                <a class="writerid" href="#">{{author}}</a>
+                                <a class="writerid" href="#">{{author.email}}</a>
                             </div>
 
                             <a href="/posts/update/{{id}}">
@@ -237,9 +237,8 @@
                             <div class="likezone">
                                 <a href="#">
                                     <div class="likecnt">
-                                        {{author}}
+                                        {{author.email}}
                                     </div>
-                                    &nbsp;
                                     {{title}}
                                 </a>
                                 <a href="/posts/update/{{id}}"></a>

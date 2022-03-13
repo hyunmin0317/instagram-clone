@@ -1,5 +1,6 @@
 package com.clone.instagram.domain.posts;
 
+import com.clone.instagram.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,10 +24,11 @@ public class Posts extends BaseTimeEntity {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
-    private String author;
+    @ManyToOne
+    private User author;
 
     @Builder    // 해당 클래스의 빌더 패턴 클래스 생성
-    public Posts(String title, String content, String author) {
+    public Posts(String title, String content, User author) {
         this.title = title;
         this.content = content;
         this.author = author;
