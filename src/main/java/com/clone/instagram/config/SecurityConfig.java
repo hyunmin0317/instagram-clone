@@ -1,7 +1,8 @@
 package com.clone.instagram.config;
 
-import com.clone.instagram.service.UserService;
 import lombok.RequiredArgsConstructor;
+import com.clone.instagram.config.auth.PrincipalDetailsService;
+import com.clone.instagram.config.oauth.Oauth2DetailsService;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,13 +10,13 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-
 @RequiredArgsConstructor
-@EnableWebSecurity          // Spring Security 설정 활성화
+@EnableWebSecurity
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final UserService userService;
+    private final PrincipalDetailsService principalDetailsService;
+    private final Oauth2DetailsService oauth2DetailsService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -30,15 +31,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .formLogin()
                     .loginPage("/login")
                     .loginProcessingUrl("/loginForm")
-                    .defaultSuccessUrl("/user/story")
+                    .defaultSuccessUrl("/")
                 .and()
-                   .logout()
+                    .logout()
                     .logoutSuccessUrl("/login")
-                    .invalidateHttpSession(true); // 세션 전체 삭제
+                    .invalidateHttpSession(true)
+                .and()
+                    .oauth2Login()
+                    .loginPage("/login")
+                    .userInfoEndpoint()
+                    .userService(oauth2DetailsService);
     }
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService).passwordEncoder(new BCryptPasswordEncoder());
+        auth.userDetailsService(principalDetailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
 }

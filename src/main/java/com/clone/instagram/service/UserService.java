@@ -1,99 +1,105 @@
 package com.clone.instagram.service;
 
+import lombok.RequiredArgsConstructor;
+import com.clone.instagram.config.auth.PrincipalDetails;
 import com.clone.instagram.domain.follow.FollowRepository;
 import com.clone.instagram.domain.user.User;
 import com.clone.instagram.domain.user.UserRepository;
-import com.clone.instagram.web.dto.user.UserDto;
+import com.clone.instagram.handler.ex.CustomValidationException;
 import com.clone.instagram.web.dto.user.UserProfileDto;
 import com.clone.instagram.web.dto.user.UserSignupDto;
 import com.clone.instagram.web.dto.user.UserUpdateDto;
-import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.transaction.Transactional;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @RequiredArgsConstructor
 @Service
-public class UserService implements UserDetailsService {
+public class UserService {
 
     private final UserRepository userRepository;
     private final FollowRepository followRepository;
 
     @Transactional
-    public boolean save(UserSignupDto userSignupDto) {
-        if(userRepository.findUserByEmail(userSignupDto.getEmail()) != null)
-            return false;
+    public User save(UserSignupDto userSignupDto) {
+        if(userRepository.findUserByEmail(userSignupDto.getEmail()) != null) throw new CustomValidationException("이미 존재하는 email입니다.");
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        userRepository.save(User.builder()
+        return userRepository.save(User.builder()
                 .email(userSignupDto.getEmail())
                 .password(encoder.encode(userSignupDto.getPassword()))
                 .phone(userSignupDto.getPhone())
                 .name(userSignupDto.getName())
                 .title(null)
                 .website(null)
-                .profileImgUrl("/img/default_profile.jpg")
+                .profileImgUrl(null)
                 .build());
-        return true;
     }
 
+    @Value("${profileImg.path}")
+    private String uploadFolder;
+
     @Transactional
-    public void update(UserUpdateDto userUpdateDto) {
-        User user = userRepository.findUserById(userUpdateDto.getId());
+    public void update(UserUpdateDto userUpdateDto, MultipartFile multipartFile, PrincipalDetails principalDetails) {
+        User user = userRepository.findById(principalDetails.getUser().getId()).orElseThrow(() -> { return new CustomValidationException("찾을 수 없는 user입니다.");});
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+        if(!multipartFile.isEmpty()) { //파일이 업로드 되었는지 확인
+            String imageFileName = user.getId() + "_" + multipartFile.getOriginalFilename();
+            Path imageFilePath = Paths.get(uploadFolder + imageFileName);
+            try {
+                if (user.getProfileImgUrl() != null) { // 이미 프로필 사진이 있을경우
+                    File file = new File(uploadFolder + user.getProfileImgUrl());
+                    file.delete(); // 원래파일 삭제
+                }
+                Files.write(imageFilePath, multipartFile.getBytes());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            user.updateProfileImgUrl(imageFileName);
+        }
+
         user.update(
                 encoder.encode(userUpdateDto.getPassword()),
                 userUpdateDto.getPhone(),
                 userUpdateDto.getName(),
                 userUpdateDto.getTitle(),
-                userUpdateDto.getWebsite(),
-                userUpdateDto.getProfileImgUrl()
+                userUpdateDto.getWebsite()
         );
-    }
 
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return userRepository.findUserByEmail(email);
-    }
-
-    public UserDto getUserDtoByEmail(String email) {
-        User user = userRepository.findUserByEmail(email);
-
-        return UserDto.builder()
-                .id(user.getId())
-                .email(email)
-                .name(user.getName())
-                .title(user.getTitle())
-                .phone(user.getPhone())
-                .website(user.getWebsite())
-                .profileImgUrl(user.getProfileImgUrl())
-                .build();
+        //세션 정보 변경
+        principalDetails.updateUser(user);
     }
 
     @Transactional
-    public UserProfileDto getProfile(long currentId, String loginEmail) {
+    public UserProfileDto getUserProfileDto(long profileId, long sessionId) {
         UserProfileDto userProfileDto = new UserProfileDto();
 
-        User user = userRepository.findUserById(currentId);
-        userProfileDto.setUserDto(UserDto.builder()
-                .id(user.getId())
-                .email(user.getEmail())
-                .name(user.getName())
-                .title(user.getTitle())
-                .phone(user.getPhone())
-                .website(user.getWebsite())
-                .profileImgUrl(user.getProfileImgUrl())
-                .build());
+        User user = userRepository.findById(profileId).orElseThrow(() -> { return new CustomValidationException("찾을 수 없는 user입니다.");});
+        userProfileDto.setUser(user);
+        userProfileDto.setPostCount(user.getPostList().size());
 
-        User loginUser = userRepository.findUserByEmail(loginEmail);
+        // currentId가 로그인된 사용자 인지 확인
+        User loginUser = userRepository.findById(sessionId).orElseThrow(() -> { return new CustomValidationException("찾을 수 없는 user입니다.");});
         userProfileDto.setLoginUser(loginUser.getId() == user.getId());
-        userProfileDto.setLoginId(loginUser.getId());
 
-        userProfileDto.setFollow(followRepository.findFollowByFromUserAndToUser(loginUser, user) != null);
-        userProfileDto.setUserFollowerCount(followRepository.findFollowerCountById(currentId));
-        userProfileDto.setUserFollowingCount(followRepository.findFollowingCountById(currentId));
+        // currentId user 가 loginEmail user 를 구독 했는지 확인
+        userProfileDto.setFollow(followRepository.findFollowByFromUserIdAndToUserId(loginUser.getId(), user.getId()) != null);
+
+        //currentId user 의 팔로워, 팔로잉 수를 확인
+        userProfileDto.setUserFollowerCount(followRepository.findFollowerCountById(profileId));
+        userProfileDto.setUserFollowingCount(followRepository.findFollowingCountById(profileId));
+
+        //좋아요 수 확인
+        user.getPostList().forEach(post -> {
+            post.updateLikesCount(post.getLikesList().size());
+        });
 
         return userProfileDto;
     }

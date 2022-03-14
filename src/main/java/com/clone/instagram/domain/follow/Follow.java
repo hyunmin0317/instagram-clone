@@ -1,17 +1,22 @@
 package com.clone.instagram.domain.follow;
 
-import com.clone.instagram.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import com.clone.instagram.domain.user.User;
 import javax.persistence.*;
 
 @Getter
-@Setter
 @NoArgsConstructor
 @Entity
+@Table(
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name="subscribe_uk",
+                        columnNames = {"from_user_id", "to_user_id"}
+                )
+        }
+)
 public class Follow {
 
     @Id

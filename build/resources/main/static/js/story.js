@@ -18,7 +18,7 @@ function storyLoad() {
 storyLoad();
 
 function getStoryItem(post) {
-        let item = `
+    let item = `
         <article>
             <header>
                 <div class="profile-of-article">

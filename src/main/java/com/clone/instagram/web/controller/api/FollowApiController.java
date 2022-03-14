@@ -1,41 +1,29 @@
 package com.clone.instagram.web.controller.api;
 
-import com.clone.instagram.domain.follow.Follow;
-import com.clone.instagram.domain.follow.FollowRepository;
-import com.clone.instagram.service.FollowService;
-import com.clone.instagram.web.dto.follow.FollowDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
+import com.clone.instagram.config.auth.PrincipalDetails;
+import com.clone.instagram.service.FollowService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api")
 public class FollowApiController {
 
-    private final FollowRepository followRepository;
     private final FollowService followService;
 
     @PostMapping("/follow/{toUserId}")
-    public Follow followUser(@PathVariable long toUserId, Authentication authentication) {
-        return followService.save(authentication.getName(), toUserId);
+    public ResponseEntity<?> followUser(@PathVariable long toUserId, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        followService.follow(principalDetails.getUser().getId(), toUserId);
+        return new ResponseEntity<>("팔로우 성공", HttpStatus.OK);
     }
 
     @DeleteMapping("/follow/{toUserId}")
-    public void unFollowUser(@PathVariable long toUserId, Authentication authentication) {
-        Long id = followService.getFollowIdByFromEmailToId(authentication.getName(), toUserId);
-        followRepository.deleteById(id);
-    }
-
-    @GetMapping("/user/{profileId}/follower")
-    public List<FollowDto> getFollower(@PathVariable long profileId, Authentication authentication) {
-        return followService.getFollowDtoListByProfileIdAboutFollower(profileId, authentication.getName());
-    }
-
-    @GetMapping("/user/{profileId}/following")
-    public List<FollowDto> getFollowing(@PathVariable long profileId, Authentication authentication) {
-        return followService.getFollowDtoListByProfileIdAboutFollowing(profileId, authentication.getName());
+    public ResponseEntity<?> unFollowUser(@PathVariable long toUserId, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        followService.unFollow(principalDetails.getUser().getId(), toUserId);
+        return new ResponseEntity<>("팔로우 취소 성공", HttpStatus.OK);
     }
 }
