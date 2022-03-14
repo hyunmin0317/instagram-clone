@@ -40,6 +40,15 @@ public class User implements UserDetails {
         this.profileImgUrl = profileImgUrl;
     }
 
+    public void update(String password, String phone, String name, String title, String website, String profileImgUrl) {
+        this.password = password;
+        this.phone = phone;
+        this.name = name;
+        this.title = title;
+        this.website = website;
+        this.profileImgUrl = profileImgUrl;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;

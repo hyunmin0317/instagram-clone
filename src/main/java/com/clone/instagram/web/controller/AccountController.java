@@ -16,7 +16,6 @@ public class AccountController {
     @Autowired
     UserService userService;
 
-    //회원가입
     @PostMapping("/signup")
     public String signup(UserSignupDto userSignupDto, BindingResult bindingResult) {
         if (userService.save(userSignupDto))
