@@ -1,5 +1,6 @@
 package com.clone.instagram.service;
 
+import com.clone.instagram.domain.follow.FollowRepository;
 import com.clone.instagram.domain.user.User;
 import com.clone.instagram.domain.user.UserRepository;
 import com.clone.instagram.web.dto.user.UserDto;
@@ -19,6 +20,7 @@ import javax.transaction.Transactional;
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
+    private final FollowRepository followRepository;
 
     @Transactional
     public boolean save(UserSignupDto userSignupDto) {
@@ -88,6 +90,10 @@ public class UserService implements UserDetailsService {
         User loginUser = userRepository.findUserByEmail(loginEmail);
         userProfileDto.setLoginUser(loginUser.getId() == user.getId());
         userProfileDto.setLoginId(loginUser.getId());
+
+        userProfileDto.setFollow(followRepository.findFollowByFromUserAndToUser(loginUser, user) != null);
+        userProfileDto.setUserFollowerCount(followRepository.findFollowerCountById(currentId));
+        userProfileDto.setUserFollowingCount(followRepository.findFollowingCountById(currentId));
 
         return userProfileDto;
     }

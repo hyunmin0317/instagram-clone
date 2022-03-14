@@ -29,12 +29,12 @@ public class FollowApiController {
         followRepository.deleteById(id);
     }
 
-    @GetMapping("/follow/{profileId}/follower")
+    @GetMapping("/user/{profileId}/follower")
     public List<FollowDto> getFollower(@PathVariable long profileId, Authentication authentication) {
         return followService.getFollowDtoListByProfileIdAboutFollower(profileId, authentication.getName());
     }
 
-    @GetMapping("/follow/{profileId}/following")
+    @GetMapping("/user/{profileId}/following")
     public List<FollowDto> getFollowing(@PathVariable long profileId, Authentication authentication) {
         return followService.getFollowDtoListByProfileIdAboutFollowing(profileId, authentication.getName());
     }
