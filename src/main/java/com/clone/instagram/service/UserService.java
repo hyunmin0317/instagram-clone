@@ -2,6 +2,7 @@ package com.clone.instagram.service;
 
 import com.clone.instagram.domain.user.User;
 import com.clone.instagram.domain.user.UserRepository;
+import com.clone.instagram.web.dto.user.UserDto;
 import com.clone.instagram.web.dto.user.UserSignupDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -37,5 +38,19 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return userRepository.findUserByEmail(email);
+    }
+
+    public UserDto getUserDtoByEmail(String email) {
+        User user = userRepository.findUserByEmail(email);
+
+        return UserDto.builder()
+                .id(user.getId())
+                .email(email)
+                .name(user.getName())
+                .title(user.getTitle())
+                .phone(user.getPhone())
+                .website(user.getWebsite())
+                .profileImgUrl(user.getProfileImgUrl())
+                .build();
     }
 }
