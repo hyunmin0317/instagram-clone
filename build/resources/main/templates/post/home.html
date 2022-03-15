@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/common :: head('Instargram')"></head>
+<body>
+<!-- main -->
+<head th:replace="layout/common :: menu('menu')"></head>
+<main class="main">
+    <div class="feeds" id="feeds">
+        <!-- 스토리 피드 리스트 시작 -->
+        <!-- 스토리 피드 리스트  끝-->
+    </div>
+    <div class="main-right">
+        <div class="myProfile">
+            <a th:href="@{/user/profile(id=${#authentication.getPrincipal().getUser().getId()})}" ><img class="pic" th:src="@{${'/profile_imgs/' + #authentication.getPrincipal().getUser().getProfileImgUrl()}}" onerror="this.src='/img/default_profile.jpg'; "/></a>
+            <div>
+                <span class="userID point-span" th:text="${#authentication.getPrincipal().getUser().getName()}"></span>
+                <span class="sub-span" th:text="${#authentication.getPrincipal().getUser().getTitle()}"></span>
+            </div>
+        </div>
+        <div class="section-recommend">
+            <div class="menu-title">
+                <span class="sub-title">회원님을 위한 추천</span>
+                <span class="find-more">모두 보기</span>
+            </div>
+            <ul class="recommend-list">
+                <li>
+                    <div class="recommend-friend-profile">
+                        <img class="img-profile" src="/img/default_profile.jpg">
+                        <div class="profile-text">
+                            <span class="userID point-span">renebaebae</span>
+                            <span class="sub-span">팔로워 213명</span>
+                        </div>
+                    </div>
+                    <span class="btn-follow">팔로우</span>
+                </li>
+                <li>
+                    <div class="recommend-friend-profile">
+                        <img class="img-profile" src="/img/default_profile.jpg">
+                        <div class="profile-text">
+                            <span class="userID point-span">_jeongjaehyun</span>
+                            <span class="sub-span">팔로워 354명</span>
+                        </div>
+                    </div>
+                    <span class="btn-follow">팔로우</span>
+                </li>
+                <li>
+                    <div class="recommend-friend-profile">
+                        <img class="img-profile" src="/img/default_profile.jpg">
+                        <div class="profile-text">
+                            <span class="userID point-span">leehi_hi</span>
+                            <span class="sub-span">팔로워 25명</span>
+                        </div>
+                    </div>
+                    <span class="btn-follow">팔로우</span>
+                </li>
+            </ul>
+        </div>
+        <footer>
+            <br>
+            <p class="insta-sccript">
+                소개 ∙ 도움말 ∙ 홍보 센터 ∙ API ∙ 채용 정보 ∙ 개인정보처리방침 ∙ <br>약관 ∙ 위치 ∙ 인기계정 ∙ 해시태그 ∙ 언어
+                <br><br>
+                © 2022 INSTAGRAM FROM SMU
+            </p>
+        </footer>
+    </div>
+    </div>
+</main>
+<script th:inline="javascript">
+    /*[# sec:authorize="isAuthenticated()"]*/
+    let principalId = /*[[${#authentication.principal.user.id}]]*/
+    /*[/]*/
+</script>
+<script src="/js/story.js"></script>
+</body>
+</html>

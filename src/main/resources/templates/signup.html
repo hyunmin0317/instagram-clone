@@ -16,9 +16,9 @@
     <img class="logo_instagram" src="/img/logo_text.png" alt="instagram_logo">
     <form action="/signup" method="post">
         <input type="email" class="input_signup" name="email" id="email" placeholder="이메일 주소" required="required"  maxlength="30"/>
+        <input type="text" class="input_signup" name="phone" id="phone" placeholder="휴대폰 번호" required="required" />
+        <input type="text" class="input_signup" name="name" id="name" placeholder="사용자 이름" required="required" />
         <input type="password" class="input_signup" name="password" id="password" placeholder="비밀번호" required="required" />
-        <input type="text" class="input_signup" name="phone" id="phone" placeholder="전화번호" required="required" />
-        <input type="text" class="input_signup" name="name" id="name" placeholder="성명" required="required" />
         <button id="btn_signup" disabled> 가입 </button>
     </form>
     <span class="email_input_check" th:if="${param.error}" > 이메일 계정이 이미 존재합니다. </span>

@@ -129,7 +129,7 @@ main {
     margin-right: 34px;
     display: inline-block;
 }
-article, .section-story, .section-recommend {
+article, .section-story {
     background-color: #fff;
     border-radius: 3px;
     border: 1px solid #DBDBDB;
