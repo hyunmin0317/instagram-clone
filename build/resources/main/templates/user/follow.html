@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:c="http://www.w3.org/1999/XSL/Transform" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/common :: head('Instargram')"></head>
+<body>
+<head th:replace="layout/common :: menu('menu')"></head>
+<main class="main">
+<div class="mains">
+    <h3>추천</h3>
+    <div class="containers">
+        <ul class="recommend-list">
+            <li>
+                <div class="recommend-friend-profiles">
+                    <img class="img-profiles" src="/img/default_profile.jpg">
+                    <div class="profile-text">
+                        <span class="userID point-span">renebaebae</span>
+                        <span class="sub-span">팔로워 213명</span>
+                    </div>
+                </div>
+                <button class="cta btn-follows">팔로우</button>
+            </li>
+            <li>
+                <div class="recommend-friend-profiles">
+                    <img class="img-profiles" src="/img/default_profile.jpg">
+                    <div class="profile-text">
+                        <span class="userID point-span">_jeongjaehyun</span>
+                        <span class="sub-span">팔로워 354명</span>
+                    </div>
+                </div>
+                <button class="cta btn-follows">팔로우</button>
+            </li>
+            <li>
+                <div class="recommend-friend-profiles">
+                    <img class="img-profiles" src="/img/default_profile.jpg">
+                    <div class="profile-text">
+                        <span class="userID point-span">leehi_hi</span>
+                        <span class="sub-span">팔로워 25명</span>
+                    </div>
+                </div>
+                <button class="cta btn-follows">팔로우</button>
+            </li>
+        </ul>
+    </div>
+    <footer th:replace="layout/common :: footer('footer')"></footer>
+</div>
+</main>
+<script th:inline="javascript">
+    /*[# sec:authorize="isAuthenticated()"]*/
+    let principalId = /*[[${#authentication.principal.user.id}]]*/
+    /*[/]*/
+</script>
+<script src="/js/profile.js"></script>
+</body>
+</html>

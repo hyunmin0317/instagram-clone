@@ -1,0 +1,32 @@
+.containers {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #fff;
+    text-align: center;
+}
+
+.mains {
+    width: 600px;
+    margin: 50px auto;
+}
+
+.btn-follows {
+    font-weight: 600;
+}
+
+.recommend-friend-profiles {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 15px;
+    margin-left: 20px;
+    margin-right: 320px;
+}
+
+.img-profiles {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #fafafa;
+    border-radius: 100%;
+    align-content: center;
+}

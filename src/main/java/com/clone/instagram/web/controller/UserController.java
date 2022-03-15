@@ -22,7 +22,7 @@ public class UserController {
 
     private final UserService userService;
 
-    //사용자 프로필 화면으로 이동
+    // 사용자 프로필 화면으로 이동
     @GetMapping("/user/profile")
     public String profile(Model model, @RequestParam long id, @AuthenticationPrincipal PrincipalDetails principalDetails) {
         UserProfileDto userProfileDto = userService.getUserProfileDto(id, principalDetails.getUser().getId());
@@ -30,18 +30,24 @@ public class UserController {
         return "user/profile";
     }
 
-    //사용자 정보 수정 페이지로 이동
+    // 사용자 정보 수정 페이지로 이동
     @GetMapping("/user/update")
     public String update() {
         return "user/update";
     }
 
-    //사용자 정보 업데이트
+    // 사용자 정보 업데이트
     @PostMapping("/user/update")
     public String updateUser(@Valid UserUpdateDto userUpdateDto, BindingResult bindingResult, @RequestParam("profileImgUrl") MultipartFile multipartFile,
                              RedirectAttributes redirectAttributes, @AuthenticationPrincipal PrincipalDetails principalDetails) {
         userService.update(userUpdateDto, multipartFile, principalDetails);
         redirectAttributes.addAttribute("id", principalDetails.getUser().getId());
         return "redirect:/user/profile";
+    }
+
+    // 유저 팔로우 페이지로 이동
+    @GetMapping("/user/follow")
+    public String followPage() {
+        return "user/follow";
     }
 }

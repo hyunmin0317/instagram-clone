@@ -147,9 +147,6 @@ article, .section-story {
     height: 212px;
     margin-bottom: 20px;
 }
-.section-recommend {
-    height: 180px;
-}
 /* article */
 header {
     height: 60px;
@@ -370,8 +367,8 @@ ul.story-list .profile-text {
 .recommend-friend-profile {
     display: flex;
     align-items: flex-start;
+    margin-top: 15px;
 }
-
 .delete-comment-btn {
     border: none;
     outline: none;
