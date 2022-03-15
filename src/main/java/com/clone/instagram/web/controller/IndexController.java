@@ -21,7 +21,7 @@ public class IndexController {
     }
 
     // 메인 화면으로 이동
-    @GetMapping({"/", "post/story"})
+    @GetMapping("/")
     public String story() {
         return "post/home";
     }
