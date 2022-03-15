@@ -19,6 +19,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -102,5 +103,9 @@ public class UserService {
         });
 
         return userProfileDto;
+    }
+
+    public List<User> getUsers() {
+        return userRepository.findByIdIsNotNull();
     }
 }

@@ -1,5 +1,6 @@
 package com.clone.instagram.web.controller;
 
+import com.clone.instagram.domain.user.User;
 import lombok.RequiredArgsConstructor;
 import com.clone.instagram.config.auth.PrincipalDetails;
 import com.clone.instagram.service.UserService;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
@@ -47,7 +50,15 @@ public class UserController {
 
     // 유저 팔로우 페이지로 이동
     @GetMapping("/user/follow")
-    public String followPage() {
+    public String followPage(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        List<UserProfileDto> users = new ArrayList();
+
+        for (User u: userService.getUsers()) {
+            UserProfileDto userProfileDto = userService.getUserProfileDto(u.getId(), principalDetails.getUser().getId());
+            users.add(userProfileDto);
+        }
+
+        model.addAttribute("users", users);
         return "user/follow";
     }
 }

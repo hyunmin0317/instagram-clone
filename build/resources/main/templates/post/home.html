@@ -20,7 +20,9 @@
         <div class="section-recommend">
             <div class="menu-title">
                 <span class="sub-title">회원님을 위한 추천</span>
-                <a href="/user/follow"><span class="find-more">모두 보기</span></a>
+                <a th:href="@{/user/follow(id=${#authentication.getPrincipal().getUser().getId()})}" >
+                    <span class="find-more">모두 보기</span>
+                </a>
             </div>
             <ul class="recommend-list">
                 <li>
