@@ -178,3 +178,27 @@ function deleteComment(commentId) {
         console.log("오류", error);
     });
 }
+
+function toggleSubscribe(toUserId, obj) {
+    if ($(obj).text() === "언팔로우") {
+        $.ajax({
+            type: "delete",
+            url: "/api/follow/" + toUserId,
+        }).done(res => {
+            $(obj).text("팔로우");
+            $(obj).toggleClass("blue");
+        }).fail(error => {
+            console.log("언팔로우 실패", error);
+        });
+    } else {
+        $.ajax({
+            type: "post",
+            url: "/api/follow/" + toUserId,
+        }).done(res => {
+            $(obj).text("언팔로우");
+            $(obj).toggleClass("blue");
+        }).fail(error => {
+            console.log("팔로우 실패", error);
+        });
+    }
+}
