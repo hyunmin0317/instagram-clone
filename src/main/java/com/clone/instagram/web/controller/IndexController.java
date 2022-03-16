@@ -54,8 +54,10 @@ public class IndexController {
                 break;
         }
 
+        if (mainuser!=null)
+            model.addAttribute("mainuser", mainuser);
+
         model.addAttribute("users", users);
-        model.addAttribute("mainuser", mainuser);
         return "post/home";
     }
 }
