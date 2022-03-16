@@ -10,12 +10,6 @@
 
 <br>
 
-## :computer: Webpage
-
-<img src="https://github.com/hyunmin0317/COVID19-KR/blob/main/static/webpage.png?raw=true" alt="icon" />
-
-<br>
-
 ## :blue_book: 팀원 
 > **최현민 [(hyunmin0317)](https://github.com/hyunmin0317)**
 >
@@ -28,3 +22,9 @@
 > **정사비비 [(JeongSabibi)](https://github.com/JeongSabibi)** 
 >
 > **신정우 [(givemethat)](https://github.com/givemethat)**
+
+<br>
+
+## :computer: Webpage
+
+<img src="https://github.com/hyunmin0317/instagram-clone/blob/main/spring-mvc/img/profile.png?raw=true" alt="icon" />
