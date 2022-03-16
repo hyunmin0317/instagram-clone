@@ -36,15 +36,25 @@ public class IndexController {
     // 메인 화면으로 이동
     @GetMapping("/")
     public String main(Model model) {
+        List<UserProfileDto> list = new ArrayList();
         List<UserProfileDto> users = new ArrayList();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         PrincipalDetails user = (PrincipalDetails) authentication.getPrincipal();
         long id = user.getUser().getId();
+        int i = 0;
 
         for (User u: userService.getUsers()) {
             UserProfileDto userProfileDto = userService.getUserProfileDto(u.getId(), id);
             if (id!=userProfileDto.getUser().getId())
-                users.add(userProfileDto);
+                list.add(userProfileDto);
+            else
+                model.addAttribute("mainuser", userProfileDto);
+        }
+
+        for (UserProfileDto u: list) {
+            users.add(u);
+            if (i++==4)
+                break;
         }
 
         model.addAttribute("users", users);
