@@ -46,12 +46,11 @@ public class IndexController {
         for (User u: userService.getUsers()) {
             UserProfileDto userProfileDto = userService.getUserProfileDto(u.getId(), id);
             if (id!=userProfileDto.getUser().getId())
-                users.add(userProfileDto);
+                if (i<=4)
+                    users.add(userProfileDto);
             else
                 mainuser = userProfileDto;
-
-            if (i++==4)
-                break;
+            i++;
         }
 
         model.addAttribute("users", users);
