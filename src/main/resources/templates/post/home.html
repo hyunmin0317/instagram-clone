@@ -11,7 +11,7 @@
     </div>
     <div class="main-right">
         <div class="myProfile">
-            <a th:href="@{/user/profile(id=${#authentication.getPrincipal().getUser().getId()})}" ><img class="pic" th:src="@{${'/profile_imgs/' + mainuser.user.profileImgUrl}}" onerror="src='/img/default_profile.jpg'"></a>
+            <a th:href="@{/user/profile(id=${#authentication.getPrincipal().getUser().getId()})}" ><img class="pic" th:src="@{${'/profile_imgs/' + #authentication.getPrincipal().getUser().getProfileImgUrl()}}" onerror="this.src='/img/default_profile.jpg'"></a>
             <div>
                 <span class="userID point-span" th:text="${#authentication.getPrincipal().getUser().getName()}"></span>
                 <span class="sub-span" th:text="${#authentication.getPrincipal().getUser().getTitle()}"></span>

@@ -39,22 +39,15 @@ public class IndexController {
         List<UserProfileDto> users = new ArrayList();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         PrincipalDetails user = (PrincipalDetails) authentication.getPrincipal();
-        int i=0;
         long id = user.getUser().getId();
-        UserProfileDto mainuser = null;
 
         for (User u: userService.getUsers()) {
             UserProfileDto userProfileDto = userService.getUserProfileDto(u.getId(), id);
             if (id!=userProfileDto.getUser().getId())
-                if (i<=4)
-                    users.add(userProfileDto);
-            else
-                mainuser = userProfileDto;
-            i++;
+                users.add(userProfileDto);
         }
 
         model.addAttribute("users", users);
-        model.addAttribute("mainuser", mainuser);
         return "post/home";
     }
 }
