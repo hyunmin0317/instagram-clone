@@ -11,7 +11,7 @@
             <tr th:each="user : ${users}">
                 <li>
                     <div class="recommend-friend-profiles">
-                        <img class="img-profiles" src="/img/default_profile.jpg">
+                        <a th:href="@{${'/user/profile?id=' + user.user.id}}"><img class="img-profiles pic" th:src="@{${'/profile_imgs/' + user.user.profileImgUrl}}" onerror="src='/img/default_profile.jpg'"></a>
                         <div class="profile-text">
                             <span class="userID point-span">
                                 <td th:text="${user.user.name}"></td>
@@ -21,7 +21,8 @@
                             </span>
                         </div>
                     </div>
-                    <button class="cta btn-follows">팔로우</button>
+                    <button class="cta" th:if="!${user.loginUser} and !${user.follow}" th:onclick="|toggleSubscribe(${user.user.id}, this)|">팔로우</button>
+                    <button class="cta" th:if="!${user.loginUser} and ${user.follow}" th:onclick="|toggleSubscribe(${user.user.id}, this)|">언팔로우</button>
                 </li>
             </tr>
         </ul>
@@ -29,11 +30,6 @@
     <footer th:replace="layout/common :: footer('footer')"></footer>
 </div>
 </main>
-<script th:inline="javascript">
-    /*[# sec:authorize="isAuthenticated()"]*/
-    let principalId = /*[[${#authentication.principal.user.id}]]*/
-    /*[/]*/
-</script>
 <script src="/js/profile.js"></script>
 </body>
 </html>

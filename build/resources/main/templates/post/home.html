@@ -20,41 +20,28 @@
         <div class="section-recommend">
             <div class="menu-title">
                 <span class="sub-title">회원님을 위한 추천</span>
-                <a th:href="@{/user/follow(id=${#authentication.getPrincipal().getUser().getId()})}" >
+                <a href="/user/follow">
                     <span class="find-more">모두 보기</span>
                 </a>
             </div>
             <ul class="recommend-list">
-                <li>
-                    <div class="recommend-friend-profile">
-                        <img class="img-profile" src="/img/default_profile.jpg">
-                        <div class="profile-text">
-                            <span class="userID point-span">renebaebae</span>
-                            <span class="sub-span">팔로워 213명</span>
+                <tr th:each="user : ${users}">
+                    <li>
+                        <div class="recommend-friend-profile">
+                            <a th:href="@{${'/user/profile?id=' + user.user.id}}"><img class="img-profile pic" th:src="@{${'/profile_imgs/' + user.user.profileImgUrl}}" onerror="src='/img/default_profile.jpg'"></a>
+                            <div class="profile-text">
+                            <span class="userID point-span">
+                                <td th:text="${user.user.name}"></td>
+                            </span>
+                                <span class="sub-span">
+                                팔로워 <td th:text="${user.userFollowerCount}"></td>명
+                            </span>
+                            </div>
                         </div>
-                    </div>
-                    <button class="cta btn-follows">팔로우</button>
-                </li>
-                <li>
-                    <div class="recommend-friend-profile">
-                        <img class="img-profile" src="/img/default_profile.jpg">
-                        <div class="profile-text">
-                            <span class="userID point-span">_jeongjaehyun</span>
-                            <span class="sub-span">팔로워 354명</span>
-                        </div>
-                    </div>
-                    <button class="cta btn-follows">팔로우</button>
-                </li>
-                <li>
-                    <div class="recommend-friend-profile">
-                        <img class="img-profile" src="/img/default_profile.jpg">
-                        <div class="profile-text">
-                            <span class="userID point-span">leehi_hi</span>
-                            <span class="sub-span">팔로워 25명</span>
-                        </div>
-                    </div>
-                    <button class="cta btn-follows">팔로우</button>
-                </li>
+                        <button class="cta" th:if="!${user.loginUser} and !${user.follow}" th:onclick="|toggleSubscribe(${user.user.id}, this)|">팔로우</button>
+                        <button class="cta" th:if="!${user.loginUser} and ${user.follow}" th:onclick="|toggleSubscribe(${user.user.id}, this)|">언팔로우</button>
+                    </li>
+                </tr>
             </ul>
         </div>
         <footer>
@@ -68,11 +55,7 @@
     </div>
     </div>
 </main>
-<script th:inline="javascript">
-    /*[# sec:authorize="isAuthenticated()"]*/
-    let principalId = /*[[${#authentication.principal.user.id}]]*/
-    /*[/]*/
-</script>
 <script src="/js/story.js"></script>
+<script src="/js/profile.js"></script>
 </body>
 </html>

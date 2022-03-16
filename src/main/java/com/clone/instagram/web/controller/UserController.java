@@ -6,7 +6,9 @@ import com.clone.instagram.config.auth.PrincipalDetails;
 import com.clone.instagram.service.UserService;
 import com.clone.instagram.web.dto.user.UserProfileDto;
 import com.clone.instagram.web.dto.user.UserUpdateDto;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -50,12 +52,16 @@ public class UserController {
 
     // 유저 팔로우 페이지로 이동
     @GetMapping("/user/follow")
-    public String followPage(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+    public String followPage(Model model) {
         List<UserProfileDto> users = new ArrayList();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        PrincipalDetails user = (PrincipalDetails) authentication.getPrincipal();
+        long id = user.getUser().getId();
 
         for (User u: userService.getUsers()) {
-            UserProfileDto userProfileDto = userService.getUserProfileDto(u.getId(), principalDetails.getUser().getId());
-            users.add(userProfileDto);
+            UserProfileDto userProfileDto = userService.getUserProfileDto(u.getId(), id);
+            if (id!=userProfileDto.getUser().getId())
+                users.add(userProfileDto);
         }
 
         model.addAttribute("users", users);

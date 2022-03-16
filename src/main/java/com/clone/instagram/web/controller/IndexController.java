@@ -1,10 +1,19 @@
 package com.clone.instagram.web.controller;
 
+import com.clone.instagram.config.auth.PrincipalDetails;
+import com.clone.instagram.domain.user.User;
 import com.clone.instagram.service.UserService;
+import com.clone.instagram.web.dto.user.UserProfileDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
@@ -27,6 +36,22 @@ public class IndexController {
     // 메인 화면으로 이동
     @GetMapping("/")
     public String main(Model model) {
+        List<UserProfileDto> users = new ArrayList();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        PrincipalDetails user = (PrincipalDetails) authentication.getPrincipal();
+        int i=0;
+        long id = user.getUser().getId();
+
+        for (User u: userService.getUsers()) {
+            UserProfileDto userProfileDto = userService.getUserProfileDto(u.getId(), id);
+            if (id!=userProfileDto.getUser().getId())
+                users.add(userProfileDto);
+
+            if (i++==4)
+                break;
+        }
+
+        model.addAttribute("users", users);
         return "post/home";
     }
 }
